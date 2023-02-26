@@ -19,4 +19,4 @@
 @import url(../blocks/mesto/__description/mesto__description.css);
 @import url(../blocks/mesto/__heading/mesto__heading.css);
 @import url(../blocks/mesto/__like-button/mesto__like-button.css);
-@import url(../blocks/mesto/__like-button/_liked/mesto__like-button_liked.css/);
+@import url(../blocks/mesto/__like-button/_liked/mesto__like-button_liked.css);
