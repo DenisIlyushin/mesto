@@ -18,6 +18,10 @@
   /* Переменные блока places */
   --places-spacer-top: 50px;
   /* --places-spacer-sides: 400px; */
+
+  /* Переменные блока footer */
+  --footer-spacer-top: 68px;
+  /* --footer-spacer-sides: 400px; */
 }
 
 /* Минимально 3 карточки */

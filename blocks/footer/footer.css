@@ -1,0 +1,11 @@
+.footer {
+  width: 880px;
+  /* width: calc(100% - 2 * var(--footer-spacer-sides)); */
+  /* margin: var(--footer-spacer-top) var(--footer-spacer-sides) 0; */
+  margin: var(--footer-spacer-top) auto 56px;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+}

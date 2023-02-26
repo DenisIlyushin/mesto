@@ -1,6 +1,6 @@
 .mesto__description {
   width: 100%;
-  min-height: 79px;
+  min-height: 80px;
   display: flex;
   flex-direction: row;
   background-color: var(--background-invert-color, #fff);
