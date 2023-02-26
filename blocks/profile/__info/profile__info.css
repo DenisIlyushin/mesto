@@ -7,7 +7,7 @@
   "user-name edit-button"
   "user-job user-job";
   grid-template-columns: 1fr 24px;
-  row-gap: 8px;
+  row-gap: 7px;
   column-gap: 18px;
   color: var(--font-color-light, #fff);
 }
