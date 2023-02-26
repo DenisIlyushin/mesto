@@ -4,14 +4,19 @@
   --font-color-dark: #000;
   --font-color-light: #fff;
   --accent-color: #545454;  
-   /* Переменные блока header */
-  --header__logo-border-color: rgba(84, 84, 84, 0.7);
-  --header-spacer-sides: 200px;
+
+  /* Переменные блока header */
+  --header-logo-border-color: rgba(84, 84, 84, 0.7);
   --header-spacer-top: 45px;
+  /* --header-spacer-sides: 400px; */
+
+  /* Переменные блока profile */
+  --profile-spacer-top: 40px;
+  /* --profile-spacer-sides: 400px; */
 }
 
 /* Минимально 3 карточки */
-@media screen and (max-width: 1279px) {
+@media screen and (max-width: 918px) {
 
 }
 

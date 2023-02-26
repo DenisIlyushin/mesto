@@ -2,6 +2,7 @@
   display: block;
   max-width: 142px;
   height: 33px;
+  overflow: clip;
 }
 
 @media screen and (max-width: 618px) {

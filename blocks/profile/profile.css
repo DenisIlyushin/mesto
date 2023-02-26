@@ -1,0 +1,11 @@
+.profile {
+  /* Задумка, превратить блок в GRIP для резинки */
+  width: 880px;
+  /* width: calc(100% - 2 * var(--profile-spacer-sides)); */
+  /* margin: var(--profile-spacer-top) var(--profile-spacer-sides) 0; */
+  margin: var(--profile-spacer-top) auto 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
