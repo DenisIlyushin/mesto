@@ -1,0 +1,14 @@
+.header {
+  width: calc(100% - 2 * var(--header-spacer-sides));
+  /* margin: 0; */
+  margin: var(--header-spacer-top) var(--header-spacer-sides) 0;
+  height: 73px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 1px solid var(
+    --header__logo-border-color,
+    rgba(84, 84, 84, 0.7)
+    );
+  background-clip: padding-box;
+}

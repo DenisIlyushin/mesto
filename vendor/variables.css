@@ -3,18 +3,24 @@
   --background-color: #000;
   --font-color-dark: #000;
   --font-color-light: #fff;
-  --font-color-grey: #545454;  ;
- 
+  --accent-color: #545454;  
+   /* Переменные блока header */
+  --header__logo-border-color: rgba(84, 84, 84, 0.7);
+  --header-spacer-sides: 200px;
+  --header-spacer-top: 45px;
 }
 
+/* Минимально 3 карточки */
 @media screen and (max-width: 1279px) {
 
 }
 
-@media screen and (max-width: 1023px) {
+/* Минимально 3 карточки */
+@media screen and (max-width: 781px) {
   
 }
 
-@media screen and (max-width: 320px) {
+/* Минимально 2 карточки */
+@media screen and (max-width: 618px) {
   
 }
