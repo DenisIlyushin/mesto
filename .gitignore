@@ -5,3 +5,5 @@
 .DS_Store
 .AppleDouble
 .LSOverride
+# Папки, создаваемые мной при разработке с материалами макета
+.junk
