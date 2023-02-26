@@ -12,3 +12,11 @@
 @import url(../blocks/profile/__user-job/profile__user-job.css);
 @import url(../blocks/profile/__edit-button/profile__edit-button.css);
 @import url(../blocks/profile/__add-button/profile__add-button.css);
+@import url(../blocks/places/places.css);
+@import url(../blocks/places/__list/places__list.css);
+@import url(../blocks/mesto/mesto.css);
+@import url(../blocks/mesto/__image/mesto__image.css);
+@import url(../blocks/mesto/__description/mesto__description.css);
+@import url(../blocks/mesto/__heading/mesto__heading.css);
+@import url(../blocks/mesto/__like-button/mesto__like-button.css);
+@import url(../blocks/mesto/__like-button/_liked/mesto__like-button_liked.css/);

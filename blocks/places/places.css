@@ -1,0 +1,8 @@
+.places {
+  /* Задумка, превратить блок в GRIP для резинки */
+  width: 880px;
+  /* width: calc(100% - 2 * var(--places-spacer-sides)); */
+  /* margin: var(--places-spacer-top) var(--places-spacer-sides) 0; */
+  margin: var(--places-spacer-top) auto 0;
+  padding: 0;
+}
