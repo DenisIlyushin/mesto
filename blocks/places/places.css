@@ -1,21 +1,16 @@
 .places {
-  /* Задумка, превратить блок в GRIP для резинки */
   width: var(--max-block-width);
-  /* width: calc(100% - 2 * var(--places-spacer-sides)); */
-  /* margin: var(--places-spacer-top) var(--places-spacer-sides) 0; */
   margin: var(--places-spacer-top) auto 0;
   padding: 0;
 }
 
-/* Минимально 3 карточки */
-@media screen and (max-width: 917px) {
+@media screen and (max-width: 918px) {
   .places { 
     width: var(--max-block-width);
   }
 }
 
-/* Минимально 1 карточка */
-@media screen and (max-width: 319px) {
+@media screen and (max-width: 320px) {
   .places {
     --spacer-sides: 19px;
     width: calc(var(100% - 2 * var(--spacer-sides))); 

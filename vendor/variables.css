@@ -35,24 +35,16 @@
   }
 }
 
-/* Минимально 3 карточки */
+/* Минимально 2 карточки */
 @media screen and (max-width: 918px) {
   :root { 
-    --max-block-width: 580px;
-  }
-}
-
-/* Минимально 2 карточки */
-@media screen and (max-width: 618px) {
-  :root { 
-    /* --max-block-width: 581px; */
-    --max-block-width: 320px;
+    --max-block-width: 581px;
   }
 }
 
 /* Минимально 1 карточка */
-@media screen and (max-width: 320px) {
-  :root {
+@media screen and (max-width: 618px) {
+  :root { 
     --header-spacer-top: 28px;
     --profile-spacer-top: 42px;
     --places-spacer-top: 36px;
