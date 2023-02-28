@@ -13,6 +13,8 @@
   --header-spacer-top: 45px;
   /* Переменные блока profile */
   --profile-spacer-top: 40px;
+  /* Переменные блока popup */
+  --popup_background-color: rgba(0, 0, 0, 0.5);
   /* Переменные блока places */
   --places-spacer-top: 50px;
   /* Переменные блока footer */
