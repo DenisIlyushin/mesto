@@ -31,28 +31,22 @@
 /* Минимально 3 карточки */
 @media screen and (max-width: 1280px) {
   :root { 
-    --spacer-sides: 0;
+    --spacer-sides: 200px;
   }
 }
 
 /* Минимально 3 карточки */
 @media screen and (max-width: 918px) {
   :root { 
-    --max-block-width: 880px;
-  }
-}
-
-/* Минимально 3 карточки */
-@media screen and (max-width: 918px) {
-  :root { 
-    --max-block-width: 880px;
+    --max-block-width: 580px;
   }
 }
 
 /* Минимально 2 карточки */
 @media screen and (max-width: 618px) {
   :root { 
-    --max-block-width: 581px;
+    /* --max-block-width: 581px; */
+    --max-block-width: 320px;
   }
 }
 

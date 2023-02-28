@@ -1,5 +1,6 @@
 .profile__user-name {
   grid-area: user-name;
+  /* min-width: 189px; */
   margin: 0;
   font-weight: 500;
   font-size: 42px;
@@ -9,9 +10,8 @@
   overflow: hidden;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 618px) {
   .profile__user-name {
-    grid-area: user-name;
     font-size: 27px;
     line-height: 33px;
     text-align: center;

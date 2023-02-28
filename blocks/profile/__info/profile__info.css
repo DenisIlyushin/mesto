@@ -1,7 +1,5 @@
 .profile__info {
   margin-left: 30px;
-  min-width: 336px;
-  min-height: 77px;
   display: grid;
   grid-template-areas:
     "user-name edit-button"
@@ -12,16 +10,14 @@
   color: var(--font-color-light, #fff);
 }
 
-/* Минимально 1 карточка */
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 918px) {
   .profile__info {
-    margin: 26px auto 36px;
-    min-width: 282px;
+    width: var(--max-block-size);
+    margin: 26px auto 33px;
     grid-template-areas:
-    "--- user-name edit-button"
+    ". user-name edit-button"
     "user-job user-job user-job";
-    row-gap: 7px;
-    column-gap: 14px;
-    grid-template-columns: 1fr 18px;
+    column-gap: 10px;
+    grid-template-columns: 18px 1fr 18px;
   }
 }
