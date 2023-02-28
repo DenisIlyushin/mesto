@@ -5,34 +5,18 @@
   --font-color-dark: #000;
   --font-color-light: #fff;
   --accent-color: #545454;
-
   /* Настройки макета */
   --max-block-width: 880px;
-  --spacer-sides: 19px;
 
   /* Переменные блока header */
   --header-logo-border-color: rgba(84, 84, 84, 0.7);
   --header-spacer-top: 45px;
-  /* --header-spacer-sides: 400px; */
-
   /* Переменные блока profile */
   --profile-spacer-top: 40px;
-  /* --profile-spacer-sides: 400px; */
-
   /* Переменные блока places */
   --places-spacer-top: 50px;
-  /* --places-spacer-sides: 400px; */
-
   /* Переменные блока footer */
   --footer-spacer-top: 68px;
-  /* --footer-spacer-sides: 400px; */ 
-}
-
-/* Минимально 3 карточки */
-@media screen and (max-width: 1280px) {
-  :root { 
-    --spacer-sides: 200px;
-  }
 }
 
 /* Минимально 2 карточки */
@@ -49,6 +33,6 @@
     --profile-spacer-top: 42px;
     --places-spacer-top: 36px;
     --footer-spacer-top: 48px;
-    --max-block-width: 282px;
+    --max-block-width: 283px;
   }
 }

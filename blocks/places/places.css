@@ -3,16 +3,3 @@
   margin: var(--places-spacer-top) auto 0;
   padding: 0;
 }
-
-@media screen and (max-width: 918px) {
-  .places { 
-    width: var(--max-block-width);
-  }
-}
-
-@media screen and (max-width: 320px) {
-  .places {
-    --spacer-sides: 19px;
-    width: calc(var(100% - 2 * var(--spacer-sides))); 
-  }
-}
