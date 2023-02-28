@@ -4,10 +4,24 @@
   min-height: 77px;
   display: grid;
   grid-template-areas:
-  "user-name edit-button"
-  "user-job user-job";
+    "user-name edit-button"
+    "user-job user-job";
   grid-template-columns: 1fr 24px;
   row-gap: 7px;
   column-gap: 18px;
   color: var(--font-color-light, #fff);
+}
+
+/* Минимально 1 карточка */
+@media screen and (max-width: 320px) {
+  .profile__info {
+    margin: 26px auto 36px;
+    min-width: 282px;
+    grid-template-areas:
+    "--- user-name edit-button"
+    "user-job user-job user-job";
+    row-gap: 7px;
+    column-gap: 14px;
+    grid-template-columns: 1fr 18px;
+  }
 }

@@ -1,5 +1,5 @@
 .header {
-  width: 880px;
+  width: var(--max-block-width);
   /* width: calc(100% - 2 * var(--header-spacer-sides)); */
   /* margin: var(--header-spacer-top) var(--header-spacer-sides) 0; */
   margin: var(--header-spacer-top) auto 0;
@@ -13,4 +13,27 @@
     rgba(84, 84, 84, 0.7)
     );
   background-clip: padding-box;
+}
+
+/* Минимально 3 карточки */
+@media screen and (max-width: 917px) {
+  .header { 
+    width: var(--max-block-width);
+  }
+}
+
+/* Минимально 1 карточка */
+@media screen and (max-width: 321px) {
+  .header {
+    width: calc(100% - 2 * var(--spacer-sides));
+    margin: var(--header-spacer-top) auto 0;
+  }
+}
+
+/* Минимально 1 карточка */
+@media screen and (max-width: 320px) {
+  .header {
+    width: 100%;
+    height: calc(83px - var(--header-spacer-top));
+  }
 }

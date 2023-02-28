@@ -5,9 +5,10 @@
   overflow: clip;
 }
 
-@media screen and (max-width: 618px) {
+@media screen and (max-width: 320px) {
   .header__logo {
       max-width: 104px;
       height: 25px;
+      margin-left: 27px;
   }
 }

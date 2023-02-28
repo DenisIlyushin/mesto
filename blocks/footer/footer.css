@@ -1,5 +1,5 @@
 .footer {
-  width: 880px;
+  width: var(--max-block-width);
   /* width: calc(100% - 2 * var(--footer-spacer-sides)); */
   /* margin: var(--footer-spacer-top) var(--footer-spacer-sides) 0; */
   margin: var(--footer-spacer-top) auto 56px;
@@ -8,4 +8,19 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
+}
+
+/* Минимально 3 карточки */
+@media screen and (max-width: 917px) {
+  .footer { 
+    width: var(--max-block-width);
+  }
+}
+
+/* Минимально 1 карточка */
+@media screen and (max-width: 319px) {
+  .footer {
+    width: calc(var(100% - 2 * var(--spacer-sides))); 
+    --spacer-sides: 19px;
+  }
 }
