@@ -13,6 +13,11 @@
   cursor: pointer;
 }
 
+.form__submit-button:hover {
+  opacity: 0.6;
+  transition: opacity 0.2s linear;
+}
+
 @media screen and (max-width: 618px) {
   .form__submit-button {
     margin-top: 44px;
