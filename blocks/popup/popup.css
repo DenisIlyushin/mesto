@@ -1,5 +1,5 @@
 .popup {
-  /* visibility: hidden; */
+  visibility: hidden;
   position: fixed;
   z-index: 10;
   top: 0;
