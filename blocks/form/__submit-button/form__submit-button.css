@@ -12,3 +12,12 @@
   text-align: center;
   cursor: pointer;
 }
+
+@media screen and (max-width: 618px) {
+  .form__submit-button {
+    margin-top: 44px;
+    height: 46px;
+    font-size: 14px;
+    line-height: 17px;
+  }
+}

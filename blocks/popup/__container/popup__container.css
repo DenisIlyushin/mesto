@@ -7,3 +7,10 @@
   background-color: var(--background-invert-color);
   box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
 }
+
+@media screen and (max-width: 618px) {
+  .popup__container {
+    padding: 26px 22px 25px;
+    max-width: 282px;
+  }
+}
