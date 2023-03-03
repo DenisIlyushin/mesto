@@ -20,13 +20,6 @@ function hidePopup() {
   popupElement.classList.remove("popup_opened");
 }
 
-function hidePopupByClickOnOverlay(event) {
-  if (event.target !== event.currentTarget) {
-    return;
-  }
-  hidePopup();
-}
-
 function handleFormSubmit(evt) {
   evt.preventDefault();
   userNameElement.textContent = popupUserNameInput.value;
