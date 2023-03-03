@@ -1,6 +1,4 @@
-const profileEditButtonElement = document.querySelector(
-  ".profile__edit-button"
-);
+const profileEditButtonElement = document.querySelector(".profile__edit-button");
 let popupElement = document.querySelector(".popup");
 const popupCloseButtonElement = popupElement.querySelector(".popup__close-button");
 let popupUserNameInput = popupElement.querySelector(".form > #popup-user-name");
@@ -11,7 +9,6 @@ let userNameElement = document.querySelector(
 let userJobElement = document.querySelector(
   "section.profile > div.profile__info > .profile__user-job"
 );
-let likeButtonsElement = document.querySelectorAll(".mesto__like-button");
 
 function showPopup() {
   popupElement.classList.add("popup_opened");
@@ -37,14 +34,7 @@ function handleFormSubmit(evt) {
   hidePopup();
 }
 
-function toggleMestoLikedStatus(event) {
-  event.target.classList.toggle("mesto__like-button_liked");
-}
-
 profileEditButtonElement.addEventListener("click", showPopup);
 popupCloseButtonElement.addEventListener("click", hidePopup);
 popupElement.addEventListener("click", hidePopupByClickOnOverlay);
 popupElement.addEventListener("submit", handleFormSubmit);
-likeButtonsElement.forEach((likeButton) => {
-  likeButton.addEventListener("click", toggleMestoLikedStatus);
-});
