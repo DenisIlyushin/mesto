@@ -7,10 +7,10 @@
   height: 32px;
   border: 0;
   background-color: var(--popup_background--color);
-  background-image: url("../../../images/close-button.svg");
+  background-image: url('../../../images/close-button.svg');
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 32px;
+  background-size: cover;
   cursor: pointer;
 }
 

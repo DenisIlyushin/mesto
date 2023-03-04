@@ -4,9 +4,10 @@
   width: 24px;
   height: 24px;
   box-sizing: border-box;
-  background-color: var(--background-color, #000);
-  border: 0px solid var(--font-color-light, #fff);
-  background-image: url(../../../images/edit-button.svg);
+  background-color: transparent;
+  border: 1px solid var(--font-color-light, #fff);
+  background-image: url('../../../images/edit-button.svg');
+  background-size: 10px;
   background-position: center;
   background-repeat: no-repeat;
   align-self: last baseline;

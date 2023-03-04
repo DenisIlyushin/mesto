@@ -1,5 +1,6 @@
 .footer {
   width: 100%;
+  flex-shrink: 0;
   margin-top: var(--footer-spacer-top);
   margin-bottom: 56px;
   padding: 0;
@@ -11,7 +12,6 @@
 
 @media screen and (max-width: 320px) {
   .footer {
-    height: var(--footer-spacer-top);
     margin-bottom: 33px;
   }
 }

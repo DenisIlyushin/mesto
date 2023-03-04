@@ -4,11 +4,10 @@
   width: 150px;
   height: 50px;
   box-sizing: border-box;
-  background-color: var(--background-color, #000);
+  background-color: transparent;
   border: 2px solid var(--font-color-light, #fff);
   border-radius: 2px;
-  color: var(--font-color-light);
-  background-image: url(../../../images/add-button.svg);
+  background-image: url('../../../images/add-button.svg');
   background-size: 22px;
   background-position: center;
   background-repeat: no-repeat;

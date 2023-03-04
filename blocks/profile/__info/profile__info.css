@@ -12,8 +12,7 @@
 
 @media screen and (max-width: 918px) {
   .profile__info {
-    width: var(--max-block-size);
-    margin: 26px auto 33px;
+    margin: 26px auto 32px;
     grid-template-areas:
     ". user-name edit-button"
     "user-job user-job user-job";

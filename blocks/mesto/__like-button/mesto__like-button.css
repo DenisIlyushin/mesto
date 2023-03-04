@@ -4,17 +4,16 @@
   width: 22px;
   max-height: 19px;
   box-sizing: border-box;
-  background-color: var(--background-invert-color, #fff);
-  border: 0px solid var(--font-color-light, #fff);
-  border-radius: 2px;
+  background-color: transparent;
+  border: none;
   color: var(--font-color-dark);
-  background-image: url(../../../images/like-button.svg);
+  background-image: url('../../../images/like-button.svg');
   background-position: center;
   background-repeat: no-repeat;
   cursor: pointer;
 }
 
 .mesto__like-button:hover {
-  opacity: 0.6;
+  opacity: 0.5;
   transition: opacity 0.2s linear;
 }

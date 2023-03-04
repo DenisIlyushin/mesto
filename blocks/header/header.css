@@ -2,7 +2,6 @@
   width: 100%;
   margin-top: var(--header-spacer-top);
   padding: 0;
-  height: 73px;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -11,10 +10,4 @@
     rgba(84, 84, 84, 0.7)
     );
   background-clip: padding-box;
-}
-
-@media screen and (max-width: 320px) {
-  .header {
-    height: calc(83px - var(--header-spacer-top));
-  }
 }
