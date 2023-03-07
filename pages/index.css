@@ -23,6 +23,7 @@
 @import url(../blocks/places/places.css);
 @import url(../blocks/places/__list/places__list.css);
 @import url(../blocks/mesto/mesto.css);
+@import url(../blocks/mesto/__delete-button/mesto__delete-button.css);
 @import url(../blocks/mesto/__image/mesto__image.css);
 @import url(../blocks/mesto/__description/mesto__description.css);
 @import url(../blocks/mesto/__heading/mesto__heading.css);
