@@ -108,7 +108,15 @@ function handleMestoFormSubmit(evt) {
     name: popupMestoNameInput.value,
     link: popupMestoUrlInput.value,
   }
-  addMesto(mesto)
+  // Если данные были переданы в форму - создаем карточку Места на странице
+  if (Object.values(mesto).every(value => value !== null && value !== '')) {
+    addMesto(mesto)
+  }
+  // Сброс значений в полях ввода в форме
+  const formInputs = evt.target.querySelectorAll('.form__input')
+  formInputs.forEach(element => {
+    element.value = ''
+  });
   hidePopup(popupMestoElement);
 }
 
