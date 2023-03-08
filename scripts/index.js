@@ -9,51 +9,87 @@ const popupUserJobInput = popupUserFormElement.userJob;
 const userNameElement = document.querySelector('.profile__user-name');
 const userJobElement = document.querySelector('.profile__user-job');
 
+// Первоначальная начинка страница по темплейту
+const placesList = document.querySelector('.places__list')
+const initialCards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+];
 
-
-// Лайки
-function addEventListenerToLikeButtons () {
-  const likeButtonsElement = document.querySelectorAll(".mesto__like-button");
-  likeButtonsElement.forEach((likeButton) => {
-    likeButton.addEventListener("click", function(event) {
+function addMesto(mestoObj) {
+  const mesto = document.querySelector('#mesto').content.cloneNode(true);
+  mesto.querySelector('.mesto__heading').textContent = mestoObj.name;
+  mesto.querySelector('.mesto__image').src = mestoObj.link;
+  mesto.querySelector('.mesto__image').alt = `Фотография ${mestoObj.name}`
+  mesto.querySelector('.mesto__like-button').addEventListener(
+    "click", (event) => {
+    //  console.log(`Лайк-дизлайк ${event.target.parentElement.
+    //   querySelector('.mesto__description').innerText}`)
       event.target.classList.toggle("mesto__like-button_liked");
     });
-  });
-}
-addEventListenerToLikeButtons()
-
-// Кнопки удаления
-function addEventListenerToDeleteButtons () {
-  const deleteButtonsElement = document.querySelectorAll(".mesto__delete-button");
-  deleteButtonsElement.forEach((deleteButton) => {
-    deleteButton.addEventListener("click", function(event) {
-      // event.target.;
-      console.log(`Удалить карточку ${event.target.parentElement.querySelector('.mesto__description').innerText}`)
+  mesto.querySelector('.mesto__delete-button').addEventListener(
+    "click", (event) => {
+    //  console.log(`Удалить карточку ${event.target.parentElement.
+    //   querySelector('.mesto__description').innerText}`)
+      event.target.parentElement.remove()
     });
+  placesList.prepend(mesto)
+}
+
+function _initPage(initialMestoList) {
+  initialMestoList.forEach(element => {
+    addMesto(element);
   });
 }
-addEventListenerToDeleteButtons()
+
+_initPage(initialCards)
+
 
 // Работа с формой профиля
-function showUserPopup() {
-  popupUserElement.classList.add('popup_opened');
-  popupUserNameInput.value = userNameElement.textContent;
-  popupUserJobInput.value = userJobElement.textContent;
+function showPopup(popupElement) {
+  popupElement.classList.add('popup_opened');
+
 }
 
-function hideUserPopup() {
-  popupUserElement.classList.remove('popup_opened');
+function hidePopup(popupElement) {
+  popupElement.classList.remove('popup_opened');
 }
 
 function handleUserFormSubmit(evt) {
   evt.preventDefault();
   userNameElement.textContent = popupUserNameInput.value;
   userJobElement.textContent = popupUserJobInput.value;
-  hideUserPopup();
+  hidePopup(popupUserElement);
 }
 
-profileEditButtonElement.addEventListener('click', showUserPopup);
-popupUserCloseButtonElement.addEventListener('click', hideUserPopup);
+profileEditButtonElement.addEventListener('click', () => {
+  popupUserNameInput.value = userNameElement.textContent;
+  popupUserJobInput.value = userJobElement.textContent;
+  showPopup(popupUserElement)
+});
+popupUserCloseButtonElement.addEventListener('click', () => {hidePopup(popupUserElement)});
 popupUserFormElement.addEventListener('submit', handleUserFormSubmit);
 
 // Работа с формой карточки
@@ -63,23 +99,19 @@ const popupMestoElement = document.querySelector('#addMesto');
 const popupMestoCloseButtonElement = popupMestoElement.querySelector('.popup__close-button');
 const popupMestoFormElement = document.forms.popupAddMesto;
 const popupMestoNameInput = popupMestoFormElement.mestoName;
-const popupMestoJobInput = popupMestoFormElement.mestoUrl;
+const popupMestoUrlInput = popupMestoFormElement.mestoUrl;
 
-function showMestoPopup() {
-  popupMestoElement.classList.add('popup_opened');
-}
-
-function hideMestoPopup() {
-  popupMestoElement.classList.remove('popup_opened');
-}
 
 function handleMestoFormSubmit(evt) {
   evt.preventDefault();
-// 
-  hideMestoPopup();
+  mesto = {
+    name: popupMestoNameInput.value,
+    link: popupMestoUrlInput.value,
+  }
+  addMesto(mesto)
+  hidePopup(popupMestoElement);
 }
 
-profileAddButtonElement.addEventListener('click', showMestoPopup);
-popupMestoCloseButtonElement.addEventListener('click', hideMestoPopup);
+profileAddButtonElement.addEventListener('click', () => {showPopup(popupMestoElement)});
+popupMestoCloseButtonElement.addEventListener('click', () => {hidePopup(popupMestoElement)});
 popupMestoFormElement.addEventListener('submit', handleMestoFormSubmit);
-

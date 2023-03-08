@@ -27,8 +27,7 @@
       </section>
       <section class="places" id="plases">
         <ul class="places__list">
-          <!-- вот это взять за темплейт для места -->
-          <li class="mesto">
+          <!-- <li class="mesto">
             <img class="mesto__image" src="./images/mesto-atharva-tulsi.png"
               alt="Заснеженные пики горного массива Уллу-Тау Центрального Кавказа">
             <button class="mesto__delete-button" type="button"></button>
@@ -37,7 +36,6 @@
               <button class="mesto__like-button" type="button"></button>
             </div>
           </li>
-          <!-- до сих темплейт места -->
           <li class="mesto">
             <img class="mesto__image" src="./images/mesto-baikal.png"
               alt="Пляж на берегу озера Байкал в районе посёлека Усть-Баргузин">
@@ -78,7 +76,7 @@
               <button class="mesto__like-button mesto__like-button_liked"
                 type="button"></button>
             </div>
-          </li>
+          </li> -->
         </ul>
       </section>
     </main>
@@ -112,6 +110,16 @@
         </form>
       </div>
     </div>
+    <template id="mesto">
+      <li class="mesto">
+        <img class="mesto__image" src="#" alt="#">
+        <button class="mesto__delete-button" type="button"></button>
+        <div class="mesto__description">
+          <h2 class="mesto__heading"></h2>
+          <button class="mesto__like-button" type="button"></button>
+        </div>
+      </li>
+    </template>
     <script src="./scripts/index.js"></script>
   </body>
 </html>
