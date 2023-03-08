@@ -45,14 +45,10 @@ function addMesto(mestoObj) {
   mesto.querySelector('.mesto__image').alt = `Фотография ${mestoObj.name}`
   mesto.querySelector('.mesto__like-button').addEventListener(
     "click", (event) => {
-    //  console.log(`Лайк-дизлайк ${event.target.parentElement.
-    //   querySelector('.mesto__description').innerText}`)
       event.target.classList.toggle("mesto__like-button_liked");
     });
   mesto.querySelector('.mesto__delete-button').addEventListener(
     "click", (event) => {
-    //  console.log(`Удалить карточку ${event.target.parentElement.
-    //   querySelector('.mesto__description').innerText}`)
       event.target.parentElement.remove()
     });
   placesList.prepend(mesto)
