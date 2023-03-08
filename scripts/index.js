@@ -37,6 +37,9 @@ const initialCards = [
   }
 ];
 
+// объявить функции константами + стрелки
+// код должен состоять из слушателей и базовых функций
+
 function addMesto(mestoObj) {
   const mesto = document.querySelector('#mesto').content.cloneNode(true);
   mesto.querySelector('.mesto__heading').textContent = mestoObj.name;
