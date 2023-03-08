@@ -1,4 +1,3 @@
-
 // переменные блока "Работа с формой профиля"
 const profileEditButtonElement = document.querySelector('.profile__edit-button');
 const popupUserElement = document.querySelector('#editProfile');

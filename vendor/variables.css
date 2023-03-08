@@ -16,6 +16,7 @@
   --form__input-border-color: rgba(0, 0, 0, 0.2);
   /* Переменные блока popup */
   --popup_background-color: rgba(0, 0, 0, 0.5);
+  --popup_mesto_backgroud-color: rgba(0, 0, 0, 0.9);
   /* Переменные блока places */
   --places-spacer-top: 50px;
   /* Переменные блока footer */

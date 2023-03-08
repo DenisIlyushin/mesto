@@ -1,0 +1,3 @@
+.popup_mesto {
+  background: var(--popup_mesto_backgroud-color, rgba(0, 0, 0, 0.9));
+}

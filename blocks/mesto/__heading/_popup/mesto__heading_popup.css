@@ -1,0 +1,8 @@
+.mesto__heading_popup {
+  margin: 10px 0 0 0;
+  max-width: 240px;
+  color: var(--font-color-light, #fff);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+}
