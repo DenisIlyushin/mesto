@@ -77,8 +77,8 @@ function hidePopup(popupElement) {
   popupElement.classList.remove('popup_opened');
 }
 
-function handleUserFormSubmit(evt) {
-  evt.preventDefault();
+function handleUserFormSubmit(event) {
+  event.preventDefault();
   userNameElement.textContent = popupUserNameInput.value;
   userJobElement.textContent = popupUserJobInput.value;
   hidePopup(popupUserElement);
@@ -102,8 +102,8 @@ const popupMestoNameInput = popupMestoFormElement.mestoName;
 const popupMestoUrlInput = popupMestoFormElement.mestoUrl;
 
 
-function handleMestoFormSubmit(evt) {
-  evt.preventDefault();
+function handleMestoFormSubmit(event) {
+  event.preventDefault();
   mesto = {
     name: popupMestoNameInput.value,
     link: popupMestoUrlInput.value,
@@ -112,8 +112,8 @@ function handleMestoFormSubmit(evt) {
   if (Object.values(mesto).every(value => value !== null && value !== '')) {
     addMesto(mesto)
   }
-  // Сброс значений в полях ввода в форме
-  const formInputs = evt.target.querySelectorAll('.form__input')
+  // Сброс значений в полях ввода в форме добавления Места
+  const formInputs = event.target.querySelectorAll('.form__input')
   formInputs.forEach(element => {
     element.value = ''
   });
