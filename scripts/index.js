@@ -1,4 +1,4 @@
-// переменные блока "Работа с формой профиля"
+// константы блока "Работа с формой профиля"
 const profileEditButtonElement = document.querySelector('.profile__edit-button');
 const popupUserElement = document.querySelector('#editProfile');
 const popupUserCloseButtonElement = popupUserElement.querySelector('.popup__close-button');
@@ -7,6 +7,14 @@ const popupUserNameInput = popupUserFormElement.userName;
 const popupUserJobInput = popupUserFormElement.userJob;
 const userNameElement = document.querySelector('.profile__user-name');
 const userJobElement = document.querySelector('.profile__user-job');
+
+// константы блока "Работа с формой карточки места"
+const profileAddButtonElement = document.querySelector('.profile__add-button');
+const popupMestoElement = document.querySelector('#addMesto');
+const popupMestoCloseButtonElement = popupMestoElement.querySelector('.popup__close-button');
+const popupMestoFormElement = document.forms.popupAddMesto;
+const popupMestoNameInput = popupMestoFormElement.mestoName;
+const popupMestoUrlInput = popupMestoFormElement.mestoUrl;
 
 // Первоначальная начинка страница по темплейту
 const placesList = document.querySelector('.places__list')
@@ -37,35 +45,7 @@ const initialCards = [
   }
 ];
 
-// объявить функции константами + стрелки
-// код должен состоять из слушателей и базовых функций
-
-function addMesto(mestoObj) {
-  const mesto = document.querySelector('#mesto').content.cloneNode(true);
-  mesto.querySelector('.mesto__heading').textContent = mestoObj.name;
-  mesto.querySelector('.mesto__image').src = mestoObj.link;
-  mesto.querySelector('.mesto__image').alt = `Фотография ${mestoObj.name}`
-  mesto.querySelector('.mesto__like-button').addEventListener(
-    "click", (event) => {
-      event.target.classList.toggle("mesto__like-button_liked");
-    });
-  mesto.querySelector('.mesto__delete-button').addEventListener(
-    "click", (event) => {
-      event.target.parentElement.remove()
-    });
-  placesList.prepend(mesto)
-}
-
-function _initPage(initialMestoList) {
-  initialMestoList.forEach(element => {
-    addMesto(element);
-  });
-}
-
-_initPage(initialCards)
-
-
-// Работа с формой профиля
+// Универсальные функции вызова и сокрытия попапа
 function showPopup(popupElement) {
   popupElement.classList.add('popup_opened');
 
@@ -75,32 +55,54 @@ function hidePopup(popupElement) {
   popupElement.classList.remove('popup_opened');
 }
 
-function handleUserFormSubmit(event) {
-  event.preventDefault();
-  userNameElement.textContent = popupUserNameInput.value;
-  userJobElement.textContent = popupUserJobInput.value;
-  hidePopup(popupUserElement);
+// функция добавления карточек
+function addMesto(mestoObj) {
+  const mesto = document.querySelector('#mesto').content.cloneNode(true);
+  mesto.querySelector('.mesto__heading').textContent = mestoObj.name;
+  mesto.querySelector('.mesto__image').src = mestoObj.link;
+  mesto.querySelector('.mesto__image').alt = `Фотография ${mestoObj.name}`
+  // добавляет случателя на кнопку лайка
+  mesto.querySelector('.mesto__like-button').addEventListener(
+    "click", (event) => {
+      event.target.classList.toggle("mesto__like-button_liked");
+    });
+  // добавляет слушателя на кнопку удаления карточки
+  mesto.querySelector('.mesto__delete-button').addEventListener(
+    "click", (event) => {
+      event.target.parentElement.remove()
+    });
+  placesList.prepend(mesto)
 }
 
+// добавляет первые карточки при загрузке страницы
+function _initPage(initialMestoList) {
+  initialMestoList.forEach(element => {
+    addMesto(element);
+  });
+}
+_initPage(initialCards)
+
+// обработка формы редактирования профиля
+// слушатели для работы с формой редактирования профиля
 profileEditButtonElement.addEventListener('click', () => {
   popupUserNameInput.value = userNameElement.textContent;
   popupUserJobInput.value = userJobElement.textContent;
   showPopup(popupUserElement)
 });
 popupUserCloseButtonElement.addEventListener('click', () => {hidePopup(popupUserElement)});
-popupUserFormElement.addEventListener('submit', handleUserFormSubmit);
-
-// Работа с формой карточки
-// переменные блока "Работа с формой карточки"
-const profileAddButtonElement = document.querySelector('.profile__add-button');
-const popupMestoElement = document.querySelector('#addMesto');
-const popupMestoCloseButtonElement = popupMestoElement.querySelector('.popup__close-button');
-const popupMestoFormElement = document.forms.popupAddMesto;
-const popupMestoNameInput = popupMestoFormElement.mestoName;
-const popupMestoUrlInput = popupMestoFormElement.mestoUrl;
+popupUserFormElement.addEventListener('submit', (event) => {
+  event.preventDefault();
+  userNameElement.textContent = popupUserNameInput.value;
+  userJobElement.textContent = popupUserJobInput.value;
+  hidePopup(popupUserElement);
+});
 
 
-function handleMestoFormSubmit(event) {
+// обработка формы добавления карточки
+// слушатели для работы с формой добавления карточки
+profileAddButtonElement.addEventListener('click', () => {showPopup(popupMestoElement)});
+popupMestoCloseButtonElement.addEventListener('click', () => {hidePopup(popupMestoElement)});
+popupMestoFormElement.addEventListener('submit', (event) => {
   event.preventDefault();
   mesto = {
     name: popupMestoNameInput.value,
@@ -116,8 +118,7 @@ function handleMestoFormSubmit(event) {
     element.value = ''
   });
   hidePopup(popupMestoElement);
-}
+});
 
-profileAddButtonElement.addEventListener('click', () => {showPopup(popupMestoElement)});
-popupMestoCloseButtonElement.addEventListener('click', () => {hidePopup(popupMestoElement)});
-popupMestoFormElement.addEventListener('submit', handleMestoFormSubmit);
+// обработка вызова попапа увеличения изображения карточки места
+//
