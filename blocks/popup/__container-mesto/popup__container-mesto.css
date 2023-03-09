@@ -1,0 +1,14 @@
+.popup__container-mesto {
+  position: relative;
+  max-width: 75vw;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: transparent;
+}
+
+@media screen and (max-width: 618px) {
+.popup__container-mesto {
+  padding: 26px 22px 25px;
+  max-width: 282px;
+}
+}

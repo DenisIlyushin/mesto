@@ -1,7 +1,10 @@
-.mesto__image_popup {
+.popup__image-popup {
   max-width: 75vw;
   max-height: 75vh;
+  display: block;
   aspect-ratio: auto;
+  object-fit: cover;
+  object-position: center;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
   cursor: auto;

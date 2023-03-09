@@ -19,8 +19,8 @@ const popupMestoUrlInput = popupMestoFormElement.mestoUrl;
 // Константы блока "Работа с увеличенным изображением Места"
 const popupMestoImageElement = document.querySelector('#mestoPopup');
 const popupMestoImageCloseButtonElement = popupMestoImageElement.querySelector('.popup__close-button');
-const popupMestoImageSource = popupMestoImageElement.querySelector('.mesto__image_popup');
-const popupMestoImageTitle = popupMestoImageElement.querySelector('.mesto__heading_popup');
+const popupMestoImageSource = popupMestoImageElement.querySelector('.popup__image-popup');
+const popupMestoImageTitle = popupMestoImageElement.querySelector('.popup__heading-popup');
 
 // Первоначальная начинка страница по темплейту
 const placesList = document.querySelector('.places__list');
