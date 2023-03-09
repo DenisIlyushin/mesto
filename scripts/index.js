@@ -16,6 +16,12 @@ const popupMestoFormElement = document.forms.popupAddMesto;
 const popupMestoNameInput = popupMestoFormElement.mestoName;
 const popupMestoUrlInput = popupMestoFormElement.mestoUrl;
 
+// Константы блока "Работа с увеличенным изображением Места"
+const popupMestoImageElement = document.querySelector('#mestoPopup');
+const popupMestoImageCloseButtonElement = popupMestoImageElement.querySelector('.popup__close-button');
+const popupMestoImageSource = popupMestoImageElement.querySelector('.mesto__image_popup');
+const popupMestoImageTitle = popupMestoImageElement.querySelector('.mesto__heading_popup');
+
 // Первоначальная начинка страница по темплейту
 const placesList = document.querySelector('.places__list')
 const initialCards = [
@@ -58,10 +64,12 @@ function hidePopup(popupElement) {
 // функция добавления карточек
 function addMesto(mestoObj) {
   const mesto = document.querySelector('#mesto').content.cloneNode(true);
+  const mestoImage = mesto.querySelector('.mesto__image');
+  const mestoTitle = mesto.querySelector('.mesto__heading');
   mesto.querySelector('.mesto__heading').textContent = mestoObj.name;
   mesto.querySelector('.mesto__image').src = mestoObj.link;
   mesto.querySelector('.mesto__image').alt = `Фотография ${mestoObj.name}`
-  // добавляет случателя на кнопку лайка
+  // добавляет слушателя на кнопку лайка
   mesto.querySelector('.mesto__like-button').addEventListener(
     "click", (event) => {
       event.target.classList.toggle("mesto__like-button_liked");
@@ -69,8 +77,14 @@ function addMesto(mestoObj) {
   // добавляет слушателя на кнопку удаления карточки
   mesto.querySelector('.mesto__delete-button').addEventListener(
     "click", (event) => {
-      event.target.parentElement.remove()
+      event.target.parentElement.remove();
     });
+  // добавляет слушателя на фотографию места
+  mestoImage.addEventListener('click', () => {
+    popupMestoImageSource.src = mestoImage.src;
+    popupMestoImageTitle.textContent = mestoTitle.textContent;
+    showPopup(popupMestoImageElement);
+  });
   placesList.prepend(mesto)
 }
 
@@ -83,13 +97,14 @@ function _initPage(initialMestoList) {
 _initPage(initialCards)
 
 // обработка формы редактирования профиля
-// слушатели для работы с формой редактирования профиля
 profileEditButtonElement.addEventListener('click', () => {
   popupUserNameInput.value = userNameElement.textContent;
   popupUserJobInput.value = userJobElement.textContent;
   showPopup(popupUserElement)
 });
-popupUserCloseButtonElement.addEventListener('click', () => {hidePopup(popupUserElement)});
+popupUserCloseButtonElement.addEventListener('click', () => {
+  hidePopup(popupUserElement)
+});
 popupUserFormElement.addEventListener('submit', (event) => {
   event.preventDefault();
   userNameElement.textContent = popupUserNameInput.value;
@@ -97,11 +112,13 @@ popupUserFormElement.addEventListener('submit', (event) => {
   hidePopup(popupUserElement);
 });
 
-
 // обработка формы добавления карточки
-// слушатели для работы с формой добавления карточки
-profileAddButtonElement.addEventListener('click', () => {showPopup(popupMestoElement)});
-popupMestoCloseButtonElement.addEventListener('click', () => {hidePopup(popupMestoElement)});
+profileAddButtonElement.addEventListener('click', () => {
+  showPopup(popupMestoElement)
+});
+popupMestoCloseButtonElement.addEventListener('click', () => {
+  hidePopup(popupMestoElement)
+});
 popupMestoFormElement.addEventListener('submit', (event) => {
   event.preventDefault();
   mesto = {
@@ -120,5 +137,7 @@ popupMestoFormElement.addEventListener('submit', (event) => {
   hidePopup(popupMestoElement);
 });
 
-// обработка вызова попапа увеличения изображения карточки места
-//
+// обработка закрытия попапа увеличения изображения карточки места
+popupMestoImageCloseButtonElement.addEventListener('click', () => {
+  hidePopup(popupMestoImageElement)
+});
