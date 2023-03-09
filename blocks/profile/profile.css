@@ -1,5 +1,5 @@
 .profile {
-  max-width: var(--max-block-width);
+  min-width: var(--max-block-width);
   margin-top: var(--profile-spacer-top);
   padding: 0;
   display: flex;
