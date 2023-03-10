@@ -59,9 +59,9 @@
         <form class="form" name="popupAddMesto" autocomplete="off">
           <h2 class="form__title">Новое место</h2>
           <input class="form__input" id="mestoName" name="mesto-name"
-            type="text" placeholder="Название">
+            type="text" placeholder="Название" required>
           <input class="form__input" id="mestoUrl" name="mesto-url" type="text"
-            placeholder="Ссылка на картинку">
+            placeholder="Ссылка на картинку" required>
           <button class="form__submit-button" type="submit">Создать</button>
         </form>
       </div>
@@ -76,6 +76,7 @@
         </div>
       </li>
     </template>
+    <script src="./scripts/cards.js"></script>    
     <script src="./scripts/index.js"></script>
   </body>
 </html>

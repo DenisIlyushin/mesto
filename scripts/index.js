@@ -23,33 +23,12 @@ const popupMestoImageSource = popupMestoImageElement.querySelector('.popup__imag
 const popupMestoImageTitle = popupMestoImageElement.querySelector('.popup__heading-popup');
 
 // Первоначальная начинка страница по темплейту
-const placesList = document.querySelector('.places__list');
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
+// данные карточек приходят из `./scripts/cards.js`
+const placesContainer = document.querySelector('.places__list');
+const mestoTemplate = document.querySelector('#mesto').content.querySelector('.mesto');
+
+// Константы страницы
+const popupsCloseButtonElement = document.querySelectorAll('.popup__close-button');
 
 // Универсальные функции вызова и сокрытия попапа
 function showPopup(popupElement) {
@@ -61,15 +40,28 @@ function hidePopup(popupElement) {
   popupElement.classList.remove('popup_opened');
 }
 
-// функция добавления карточек
-function addMesto(mestoObj) {
-  const mesto = document.querySelector('#mesto').content.cloneNode(true);
-  const mestoImage = mesto.querySelector('.mesto__image');
-  const mestoTitle = mesto.querySelector('.mesto__heading');
+// Работа с попапом карточек места
+// yполнить элемент карточки контентом
+function insertContentToImageElement(imageElement, contentObj) {
+  const imageImage = imageElement.querySelector('img');
+  const imageTitle = imageElement.querySelector('h2');
 
-  mesto.querySelector('.mesto__heading').textContent = mestoObj.name;
-  mesto.querySelector('.mesto__image').src = mestoObj.link;
-  mesto.querySelector('.mesto__image').alt = `Фотография ${mestoObj.name}`;
+  imageImage.src = contentObj.link;
+  imageImage.alt = `Фотография ${contentObj.name}`;
+  imageTitle.textContent = contentObj.name;
+}
+
+// добавить карточку на страницу
+function renderMesto(mestoObj) {
+  placesContainer.prepend(mestoObj);
+}
+
+// создать каторчку
+function addMesto(mestoObj) {
+  const mesto = mestoTemplate.cloneNode(true);
+  const mestoImage = mesto.querySelector('.mesto__image');
+
+  insertContentToImageElement(mesto, mestoObj);
   // добавляет слушателя на кнопку лайка
   mesto.querySelector('.mesto__like-button').addEventListener(
     "click", (event) => {
@@ -82,29 +74,35 @@ function addMesto(mestoObj) {
     });
   // добавляет слушателя на фотографию места
   mestoImage.addEventListener('click', function() {
-    popupMestoImageSource.src = mestoImage.src;
-    popupMestoImageTitle.textContent = mestoTitle.textContent;
+    insertContentToImageElement(popupMestoImageElement, mestoObj);
     showPopup(popupMestoImageElement);
   });
-  placesList.prepend(mesto)
+  // placesContainer.prepend(mesto)
+  return mesto;
 }
 
 // добавляет первые карточки при загрузке страницы
-function _initPage(initialMestoList) {
-  initialMestoList.forEach((element) => {
-    addMesto(element);
+function placeInitialDataOnPage(initialMestoList) {
+  const places = initialMestoList.map((mesto) => {
+    return addMesto(mesto);
+  });
+  return places.map((mesto) => {renderMesto(mesto);
   });
 }
-_initPage(initialCards);
+
+placeInitialDataOnPage(initialCards);
+
+// обработка закрытия всех попапов
+popupsCloseButtonElement.forEach((button) => {
+  const buttonsPopup = button.closest('.popup');
+  button.addEventListener('click', () => hidePopup(buttonsPopup));
+});
 
 // обработка формы редактирования профиля
 profileEditButtonElement.addEventListener('click', function() {
   popupUserNameInput.value = userNameElement.textContent;
   popupUserJobInput.value = userJobElement.textContent;
-  showPopup(popupUserElement)
-});
-popupUserCloseButtonElement.addEventListener('click', () => {
-  hidePopup(popupUserElement)
+  showPopup(popupUserElement);
 });
 popupUserFormElement.addEventListener('submit', function(event) {
   event.preventDefault();
@@ -115,30 +113,15 @@ popupUserFormElement.addEventListener('submit', function(event) {
 
 // обработка формы добавления карточки
 profileAddButtonElement.addEventListener('click', () => {
-  showPopup(popupMestoElement)
-});
-popupMestoCloseButtonElement.addEventListener('click', () => {
-  hidePopup(popupMestoElement)
+  showPopup(popupMestoElement);
 });
 popupMestoFormElement.addEventListener('submit', function(event) {
   event.preventDefault();
-  mesto = {
-    name: popupMestoNameInput.value,
+  const mesto = {
     link: popupMestoUrlInput.value,
-  }
-  // Если данные были переданы в форму - создаем карточку Места на странице
-  if (Object.values(mesto).every((value) => value !== null && value !== '')) {
-    addMesto(mesto)
-  }
-  // Сброс значений в полях ввода в форме добавления Места
-  const formInputs = event.target.querySelectorAll('.form__input')
-  formInputs.forEach((element) => {
-    element.value = ''
-  });
+    name: popupMestoNameInput.value
+  };
+  renderMesto(addMesto(mesto));
+  popupMestoFormElement.reset();
   hidePopup(popupMestoElement);
-});
-
-// обработка закрытия попапа увеличения изображения карточки места
-popupMestoImageCloseButtonElement.addEventListener('click', () => {
-  hidePopup(popupMestoImageElement)
 });
