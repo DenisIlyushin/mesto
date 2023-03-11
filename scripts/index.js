@@ -40,17 +40,6 @@ function hidePopup(popupElement) {
   popupElement.classList.remove('popup_opened');
 }
 
-// Работа с попапом карточек места
-// yполнить элемент карточки контентом
-function insertContentToImageElement(imageElement, contentObj) {
-  const imageImage = imageElement.querySelector('img');
-  const imageTitle = imageElement.querySelector('h2');
-
-  imageImage.src = contentObj.link;
-  imageImage.alt = `Фотография ${contentObj.name}`;
-  imageTitle.textContent = contentObj.name;
-}
-
 // добавить карточку на страницу
 function renderMesto(mestoObj) {
   placesContainer.prepend(mestoObj);
@@ -60,8 +49,11 @@ function renderMesto(mestoObj) {
 function addMesto(mestoObj) {
   const mesto = mestoTemplate.cloneNode(true);
   const mestoImage = mesto.querySelector('.mesto__image');
+  const mestoTitle = mesto.querySelector('.mesto__heading');
 
-  insertContentToImageElement(mesto, mestoObj);
+  mestoImage.src = mestoObj.link;
+  mestoImage.alt = `Фотография ${mestoObj.name}`;
+  mestoTitle.textContent = mestoObj.name;
   // добавляет слушателя на кнопку лайка
   mesto.querySelector('.mesto__like-button').addEventListener(
     "click", (event) => {
@@ -74,7 +66,9 @@ function addMesto(mestoObj) {
     });
   // добавляет слушателя на фотографию места
   mestoImage.addEventListener('click', function() {
-    insertContentToImageElement(popupMestoImageElement, mestoObj);
+    popupMestoImageSource.src = mestoImage.src;
+    popupMestoImageSource.alt = `Фотография ${mestoObj.name}`;
+    popupMestoImageTitle.textContent = mestoTitle.textContent;
     showPopup(popupMestoImageElement);
   });
   // placesContainer.prepend(mesto)
@@ -86,8 +80,7 @@ function placeInitialDataOnPage(initialMestoList) {
   const places = initialMestoList.map((mesto) => {
     return addMesto(mesto);
   });
-  return places.map((mesto) => {renderMesto(mesto);
-  });
+  places.forEach((mesto) => renderMesto(mesto));
 }
 
 placeInitialDataOnPage(initialCards);
