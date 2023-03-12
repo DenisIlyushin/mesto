@@ -66,9 +66,9 @@ function addMesto(mestoObj) {
     });
   // добавляет слушателя на фотографию места
   mestoImage.addEventListener('click', function() {
-    popupMestoImageSource.src = mestoImage.src;
+    popupMestoImageSource.src = mestoObj.link;
     popupMestoImageSource.alt = `Фотография ${mestoObj.name}`;
-    popupMestoImageTitle.textContent = mestoTitle.textContent;
+    popupMestoImageTitle.textContent = mestoObj.textContent;
     showPopup(popupMestoImageElement);
   });
   // placesContainer.prepend(mesto)
@@ -78,9 +78,8 @@ function addMesto(mestoObj) {
 // добавляет первые карточки при загрузке страницы
 function placeInitialDataOnPage(initialMestoList) {
   const places = initialMestoList.map((mesto) => {
-    return addMesto(mesto);
+    renderMesto(addMesto(mesto));
   });
-  places.forEach((mesto) => renderMesto(mesto));
 }
 
 placeInitialDataOnPage(initialCards);
