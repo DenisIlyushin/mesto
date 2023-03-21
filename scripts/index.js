@@ -68,7 +68,7 @@ function addMesto(mestoObj) {
   mestoImage.addEventListener('click', function() {
     popupMestoImageSource.src = mestoObj.link;
     popupMestoImageSource.alt = `Фотография ${mestoObj.name}`;
-    popupMestoImageTitle.textContent = mestoObj.textContent;
+    popupMestoImageTitle.textContent = mestoObj.name;
     showPopup(popupMestoImageElement);
   });
   // placesContainer.prepend(mesto)
