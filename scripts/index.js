@@ -10,7 +10,7 @@ const VALIDATION_CONFIG = {
   inputErrorClass: 'form__input_type_error',
   errorClass: 'form__input-error_active'
 }
-const popupCloseButtonElements = document.querySelectorAll('.popup__close-button');
+const popupsCloseButtonElement = document.querySelectorAll('.popup__close-button');
 const popupOverlays = document.querySelectorAll('.popup')
 
 // константы блока "Работа с формой профиля"
@@ -101,7 +101,7 @@ function placeInitialDataOnPage(initialMestoList) {
 placeInitialDataOnPage(INITIAL_CARDS);
 
 // обработка закрытия всех попапов
-popupCloseButtonElements.forEach((button) => {
+popupsCloseButtonElement.forEach((button) => {
   const buttonsPopup = button.closest('.popup');
   button.addEventListener('click', () => hidePopup(buttonsPopup));
 });

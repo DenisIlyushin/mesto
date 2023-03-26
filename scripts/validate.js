@@ -39,22 +39,22 @@ function checkInputValidity(formElement, inputElement, configObj) {
 };
 
 function setEventListeners(formElement, configObj) {
-  const inputList = Array.from(formElement.querySelectorAll(configObj.inputSelector));
+  const inputsList = Array.from(formElement.querySelectorAll(configObj.inputSelector));
   const submitButton = formElement.querySelector(configObj.submitButtonSelector);
   
-  toggleButtonState(inputList, submitButton, configObj)
-  inputList.forEach((input) => {
+  toggleButtonState(inputsList, submitButton, configObj)
+  inputsList.forEach((input) => {
     input.addEventListener('input', () => {
       checkInputValidity(formElement, input, configObj);
-      toggleButtonState(inputList, submitButton, configObj);
+      toggleButtonState(inputsList, submitButton, configObj);
     });
   });
 }
 
 export function enableValidation(configObj) {
-  const formList = Array.from(document.querySelectorAll(configObj.formSelector));
+  const formsList = Array.from(document.querySelectorAll(configObj.formSelector));
 
-  formList.forEach((form) => {
+  formsList.forEach((form) => {
     form.addEventListener('submit', (event) => {
       event.preventDefault();
     });
