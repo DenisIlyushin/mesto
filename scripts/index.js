@@ -28,16 +28,25 @@ const placesContainer = document.querySelector('.places__list');
 const mestoTemplate = document.querySelector('#mesto').content.querySelector('.mesto');
 
 // Константы страницы
-const popupsCloseButtonElement = document.querySelectorAll('.popup__close-button');
+const popupCloseButtonElements = document.querySelectorAll('.popup__close-button');
+const popupOverlays = document.querySelectorAll('.popup')
 
 // Универсальные функции вызова и сокрытия попапа
+function hidePopupOnEsc(event) {
+  if (event.key === 'Escape') {
+    const popup = document.querySelector('.popup_opened');
+    hidePopup(popup);
+  }
+}
+
 function showPopup(popupElement) {
   popupElement.classList.add('popup_opened');
-
+  document.addEventListener('keyup', hidePopupOnEsc);
 }
 
 function hidePopup(popupElement) {
   popupElement.classList.remove('popup_opened');
+  document.removeEventListener('keyup', hidePopupOnEsc);
 }
 
 // добавить карточку на страницу
@@ -71,7 +80,6 @@ function addMesto(mestoObj) {
     popupMestoImageTitle.textContent = mestoObj.name;
     showPopup(popupMestoImageElement);
   });
-  // placesContainer.prepend(mesto)
   return mesto;
 }
 
@@ -85,10 +93,17 @@ function placeInitialDataOnPage(initialMestoList) {
 placeInitialDataOnPage(initialCards);
 
 // обработка закрытия всех попапов
-popupsCloseButtonElement.forEach((button) => {
+popupCloseButtonElements.forEach((button) => {
   const buttonsPopup = button.closest('.popup');
   button.addEventListener('click', () => hidePopup(buttonsPopup));
 });
+
+// обработка закрытия попапов при клике по оверлею
+popupOverlays.forEach((overlay) => overlay.addEventListener('click', (event) => {
+  if (event.target.classList.contains('popup_opened')) {
+    hidePopup(event.target);
+  }})
+);
 
 // обработка формы редактирования профиля
 profileEditButtonElement.addEventListener('click', function () {
