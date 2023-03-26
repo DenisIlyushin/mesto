@@ -1,7 +1,21 @@
+import { enableValidation } from './validate.js';
+import { INITIAL_CARDS } from './cards.js';
+
+// Константы страницы
+const VALIDATION_CONFIG = {
+  formSelector: '.form',
+  inputSelector: '.form__input',
+  submitButtonSelector: '.form__submit-button',
+  inactiveButtonClass: 'form__submit-button_inactive',
+  inputErrorClass: 'form__input_type_error',
+  errorClass: 'form__input-error_active'
+}
+const popupCloseButtonElements = document.querySelectorAll('.popup__close-button');
+const popupOverlays = document.querySelectorAll('.popup')
+
 // константы блока "Работа с формой профиля"
 const profileEditButtonElement = document.querySelector('.profile__edit-button');
 const popupUserElement = document.querySelector('#editProfile');
-const popupUserCloseButtonElement = popupUserElement.querySelector('.popup__close-button');
 const popupUserFormElement = document.forms.popupEditProfileInfo;
 const popupUserNameInput = popupUserFormElement.userName;
 const popupUserJobInput = popupUserFormElement.userJob;
@@ -11,25 +25,19 @@ const userJobElement = document.querySelector('.profile__user-job');
 // константы блока "Работа с формой карточки места"
 const profileAddButtonElement = document.querySelector('.profile__add-button');
 const popupMestoElement = document.querySelector('#addMesto');
-const popupMestoCloseButtonElement = popupMestoElement.querySelector('.popup__close-button');
 const popupMestoFormElement = document.forms.popupAddMesto;
 const popupMestoNameInput = popupMestoFormElement.mestoName;
 const popupMestoUrlInput = popupMestoFormElement.mestoUrl;
 
 // Константы блока "Работа с увеличенным изображением Места"
 const popupMestoImageElement = document.querySelector('#mestoPopup');
-const popupMestoImageCloseButtonElement = popupMestoImageElement.querySelector('.popup__close-button');
 const popupMestoImageSource = popupMestoImageElement.querySelector('.popup__image-popup');
 const popupMestoImageTitle = popupMestoImageElement.querySelector('.popup__heading-popup');
 
 // Первоначальная начинка страница по темплейту
-// данные карточек приходят из `./scripts/cards.js`
 const placesContainer = document.querySelector('.places__list');
 const mestoTemplate = document.querySelector('#mesto').content.querySelector('.mesto');
 
-// Константы страницы
-const popupCloseButtonElements = document.querySelectorAll('.popup__close-button');
-const popupOverlays = document.querySelectorAll('.popup')
 
 // Универсальные функции вызова и сокрытия попапа
 function hidePopupOnEsc(event) {
@@ -90,7 +98,7 @@ function placeInitialDataOnPage(initialMestoList) {
   });
 }
 
-placeInitialDataOnPage(initialCards);
+placeInitialDataOnPage(INITIAL_CARDS);
 
 // обработка закрытия всех попапов
 popupCloseButtonElements.forEach((button) => {
@@ -132,3 +140,6 @@ popupMestoFormElement.addEventListener('submit', function (event) {
   popupMestoFormElement.reset();
   hidePopup(popupMestoElement);
 });
+
+// включение валидации
+enableValidation(VALIDATION_CONFIG)

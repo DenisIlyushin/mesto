@@ -71,12 +71,12 @@
             <input class="form__input" id="mestoName" name="mesto-name"
               type="text" placeholder="Название" required minlength="2"
               maxlength="40">
-            <span class="form__input-error userName-error"></span>
+            <span class="form__input-error mestoName-error"></span>
           </label>
           <label class="form__input-label">
             <input class="form__input" id="mestoUrl" name="mesto-url" type="url"
               placeholder="Ссылка на картинку" required>
-            <span class="form__input-error userName-error"></span>
+            <span class="form__input-error mestoUrl-error"></span>
           </label>
           <button class="form__submit-button" type="submit">Создать</button>
         </form>
@@ -92,8 +92,8 @@
         </div>
       </li>
     </template>
-    <script src="./scripts/cards.js"></script>
-    <script src="./scripts/index.js"></script>
-    <script src="./scripts/validate.js"></script>
+    <script src="./scripts/index.js" type="module"></script>
+    <script src="./scripts/cards.js" type="module"></script>
+    <script src="./scripts/validate.js" type="module"></script>
   </body>
 </html>
