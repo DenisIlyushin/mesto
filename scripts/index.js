@@ -65,7 +65,7 @@ function addMesto(mestoObj) {
       event.target.parentElement.remove();
     });
   // добавляет слушателя на фотографию места
-  mestoImage.addEventListener('click', function() {
+  mestoImage.addEventListener('click', function () {
     popupMestoImageSource.src = mestoObj.link;
     popupMestoImageSource.alt = `Фотография ${mestoObj.name}`;
     popupMestoImageTitle.textContent = mestoObj.name;
@@ -91,12 +91,12 @@ popupsCloseButtonElement.forEach((button) => {
 });
 
 // обработка формы редактирования профиля
-profileEditButtonElement.addEventListener('click', function() {
+profileEditButtonElement.addEventListener('click', function () {
   popupUserNameInput.value = userNameElement.textContent;
   popupUserJobInput.value = userJobElement.textContent;
   showPopup(popupUserElement);
 });
-popupUserFormElement.addEventListener('submit', function(event) {
+popupUserFormElement.addEventListener('submit', function (event) {
   event.preventDefault();
   userNameElement.textContent = popupUserNameInput.value;
   userJobElement.textContent = popupUserJobInput.value;
@@ -107,7 +107,7 @@ popupUserFormElement.addEventListener('submit', function(event) {
 profileAddButtonElement.addEventListener('click', () => {
   showPopup(popupMestoElement);
 });
-popupMestoFormElement.addEventListener('submit', function(event) {
+popupMestoFormElement.addEventListener('submit', function (event) {
   event.preventDefault();
   const mesto = {
     link: popupMestoUrlInput.value,

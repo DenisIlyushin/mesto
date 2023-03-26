@@ -43,12 +43,21 @@
     <div class="popup" id="editProfile">
       <div class="popup__container">
         <button class="popup__close-button" type="button"></button>
-        <form class="form" name="popupEditProfileInfo" autocomplete="off">
+        <form class="form" name="popupEditProfileInfo" autocomplete="off"
+          novalidate>
           <h2 class="form__title">Редактировать профиль</h2>
-          <input class="form__input" id="userName" name="popup-user-name"
-            type="text" placeholder="Ваше имя?">
-          <input class="form__input" id="userJob" name="popup-user-job"
-            type="text" placeholder="Чем занимаетесь?">
+          <label class="form__input-label">
+            <input class="form__input" id="userName" name="user-name"
+              type="text" placeholder="Ваше имя?" required minlength="2"
+              maxlength="40">
+            <span class="form__input-error userName-error"></span>
+          </label>
+          <label class="form__input-label">
+            <input class="form__input" id="userJob" name="user-job" type="text"
+              placeholder="Чем занимаетесь?" required minlength="2"
+              maxlength="200">
+            <span class="form__input-error userName-error"></span>
+          </label>
           <button class="form__submit-button" type="submit">Сохранить</button>
         </form>
       </div>
@@ -56,12 +65,19 @@
     <div class="popup" id="addMesto">
       <div class="popup__container">
         <button class="popup__close-button" type="button"></button>
-        <form class="form" name="popupAddMesto" autocomplete="off">
+        <form class="form" name="popupAddMesto" autocomplete="off" novalidate>
           <h2 class="form__title">Новое место</h2>
-          <input class="form__input" id="mestoName" name="mesto-name"
-            type="text" placeholder="Название" required>
-          <input class="form__input" id="mestoUrl" name="mesto-url" type="text"
-            placeholder="Ссылка на картинку" required>
+          <label class="form__input-label">
+            <input class="form__input" id="mestoName" name="mesto-name"
+              type="text" placeholder="Название" required minlength="2"
+              maxlength="40">
+            <span class="form__input-error userName-error"></span>
+          </label>
+          <label class="form__input-label">
+            <input class="form__input" id="mestoUrl" name="mesto-url" type="url"
+              placeholder="Ссылка на картинку" required>
+            <span class="form__input-error userName-error"></span>
+          </label>
           <button class="form__submit-button" type="submit">Создать</button>
         </form>
       </div>
@@ -76,7 +92,8 @@
         </div>
       </li>
     </template>
-    <script src="./scripts/cards.js"></script>    
+    <script src="./scripts/cards.js"></script>
     <script src="./scripts/index.js"></script>
+    <script src="./scripts/validate.js"></script>
   </body>
 </html>
