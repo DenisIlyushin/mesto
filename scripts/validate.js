@@ -8,7 +8,7 @@ function hideInputError(formElement, inputElement, configObj) {
 
 function showInputError(formElement, inputElement, errorMessage, configObj) {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-
+  
   inputElement.classList.add(configObj.inputErrorClass);
   errorElement.classList.add(configObj.errorClass);
   errorElement.textContent = errorMessage;
@@ -23,8 +23,10 @@ function hasInvalidInput(inputList) {
 function toggleButtonState(inputList, buttonElement, configObj) {
   if (hasInvalidInput(inputList)) {
       buttonElement.classList.add(configObj.inactiveButtonClass);
+      buttonElement.setAttribute('disabled', 'disabled');
   } else {
       buttonElement.classList.remove(configObj.inactiveButtonClass);
+      buttonElement.removeAttribute('disabled', 'disabled')
   }
 };
 
