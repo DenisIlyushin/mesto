@@ -1,5 +1,5 @@
-import { enableValidation } from './validate.js';
 import { INITIAL_CARDS } from './cards.js';
+import { enableValidation } from './validate.js';
 
 // Константы страницы
 const VALIDATION_CONFIG = {
