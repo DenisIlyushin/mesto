@@ -98,16 +98,12 @@ function placeInitialDataOnPage(initialMestoList) {
   })
 }
 
-// обработка закрытия всех попапов
-popupsCloseButtonElement.forEach((button) => {
-  const buttonsPopup = button.closest('.popup');
-  button.addEventListener('click', () => hidePopup(buttonsPopup));
-});
-
-// обработка закрытия попапов при клике по оверлею
-popupOverlays.forEach((overlay) => overlay.addEventListener('mousedown', (event) => {
-  if (event.target.classList.contains('popup_opened')) {
-    hidePopup(event.target);
+// обработка закрытия попапов при клике по оверлею или кнопке закрытия
+popupOverlays.forEach((overlay) => overlay.addEventListener(
+  'mousedown', (event) => {
+  if (event.target.classList.contains('popup_opened') 
+  || event.target.classList.contains('popup__close-button')) {
+    hidePopup(event.target.closest('.popup'));
   }})
 );
 
