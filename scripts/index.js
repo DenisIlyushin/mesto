@@ -73,12 +73,12 @@ function addMesto(mestoObj) {
   mestoTitle.textContent = mestoObj.name;
   // добавляет слушателя на кнопку лайка
   mesto.querySelector('.mesto__like-button').addEventListener(
-    "click", (event) => {
+    'click', (event) => {
       event.target.classList.toggle("mesto__like-button_liked");
     });
   // добавляет слушателя на кнопку удаления карточки
   mesto.querySelector('.mesto__delete-button').addEventListener(
-    "click", (event) => {
+    'click', (event) => {
       event.target.parentElement.remove();
     });
   // добавляет слушателя на фотографию места
@@ -93,9 +93,9 @@ function addMesto(mestoObj) {
 
 // добавляет первые карточки при загрузке страницы
 function placeInitialDataOnPage(initialMestoList) {
-  const places = initialMestoList.map((mesto) => {
+  initialMestoList.forEach((mesto) => {
     renderMesto(addMesto(mesto));
-  });
+  })
 }
 
 // обработка закрытия всех попапов
