@@ -105,7 +105,7 @@ popupsCloseButtonElement.forEach((button) => {
 });
 
 // обработка закрытия попапов при клике по оверлею
-popupOverlays.forEach((overlay) => overlay.addEventListener('click', (event) => {
+popupOverlays.forEach((overlay) => overlay.addEventListener('mousedown', (event) => {
   if (event.target.classList.contains('popup_opened')) {
     hidePopup(event.target);
   }})
