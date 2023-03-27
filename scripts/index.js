@@ -98,8 +98,6 @@ function placeInitialDataOnPage(initialMestoList) {
   });
 }
 
-placeInitialDataOnPage(INITIAL_CARDS);
-
 // обработка закрытия всех попапов
 popupsCloseButtonElement.forEach((button) => {
   const buttonsPopup = button.closest('.popup');
@@ -140,6 +138,9 @@ popupMestoFormElement.addEventListener('submit', function (event) {
   popupMestoFormElement.reset();
   hidePopup(popupMestoElement);
 });
+
+// наполнение страницы шаблонными карточками мест
+placeInitialDataOnPage(INITIAL_CARDS);
 
 // включение валидации
 enableValidation(VALIDATION_CONFIG)
