@@ -1,8 +1,10 @@
 .form__input-label {
-  margin: 0 0 16px;
+  margin: 0;
   padding: 0;
   width: 100%;
-  min-height: 46px;
+  display: flex;
+  flex-direction: column;
+  min-height: 58px;
 }
 
 .form__input-label:first-of-type {
