@@ -15,28 +15,28 @@ const popupOverlays = document.querySelectorAll('.popup')
 
 // константы блока "Работа с формой профиля"
 const profileEditButtonElement = document.querySelector('.profile__edit-button');
-const popupUserElement = document.querySelector('#editProfile');
-const popupUserFormElement = document.forms.popupEditProfileInfo;
-const popupUserNameInput = popupUserFormElement.userName;
-const popupUserJobInput = popupUserFormElement.userJob;
+const popupUserElement = document.querySelector('.popup_type_edit-profile')
+const popupUserFormElement = popupUserElement.querySelector('.form')
+const popupUserNameInput = popupUserFormElement.querySelector('.form__input_type_username')
+const popupUserJobInput = popupUserFormElement.querySelector('.form__input_type_user-job')
 const userNameElement = document.querySelector('.profile__user-name');
 const userJobElement = document.querySelector('.profile__user-job');
 
 // константы блока "Работа с формой карточки места"
 const profileAddButtonElement = document.querySelector('.profile__add-button');
-const popupMestoElement = document.querySelector('#addMesto');
-const popupMestoFormElement = document.forms.popupAddMesto;
-const popupMestoNameInput = popupMestoFormElement.mestoName;
-const popupMestoUrlInput = popupMestoFormElement.mestoUrl;
+const popupMestoElement = document.querySelector('.popup_type_add-mesto');
+const popupMestoFormElement = popupMestoElement.querySelector('.form');
+const popupMestoNameInput = popupMestoFormElement.querySelector('.form__input_type_mesto-heading');
+const popupMestoUrlInput = popupMestoFormElement.querySelector('.form__input_type_mesto-url');;
 
 // Константы блока "Работа с увеличенным изображением Места"
-const popupMestoImageElement = document.querySelector('#mestoPopup');
+const popupMestoImageElement = document.querySelector('.popup_type_show-mesto');
 const popupMestoImageSource = popupMestoImageElement.querySelector('.popup__image-popup');
 const popupMestoImageTitle = popupMestoImageElement.querySelector('.popup__heading-popup');
 
 // Первоначальная начинка страница по темплейту
 const placesContainer = document.querySelector('.places__list');
-const mestoTemplate = document.querySelector('#mesto').content.querySelector('.mesto');
+const mestoTemplate = document.querySelector('.template_type_mesto').content.querySelector('.mesto');
 
 
 // Универсальные функции вызова и сокрытия попапа
