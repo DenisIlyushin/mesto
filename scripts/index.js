@@ -1,8 +1,8 @@
-import { INITIAL_CARDS } from './cards.js';
+import { initialCards } from './cards.js';
 import { enableValidation } from './validate.js';
 
 // Константы страницы
-const VALIDATION_CONFIG = {
+const validationConfig = {
   formSelector: '.form',
   inputSelector: '.form__input',
   submitButtonSelector: '.form__submit-button',
@@ -140,7 +140,7 @@ popupMestoFormElement.addEventListener('submit', function (event) {
 });
 
 // наполнение страницы шаблонными карточками мест
-placeInitialDataOnPage(INITIAL_CARDS);
+placeInitialDataOnPage(initialCards);
 
 // включение валидации
-enableValidation(VALIDATION_CONFIG)
+enableValidation(validationConfig);
