@@ -6,13 +6,21 @@ function hasInvalidInput(inputList) {
   })
 };
 
+function enableSubmitButton(buttonElement, configObj) {
+  buttonElement.classList.remove(configObj.inactiveButtonClass);
+  buttonElement.removeAttribute('disabled', 'disabled');
+};
+
+function disableSubmitButton(buttonElement, configObj) {
+  buttonElement.classList.add(configObj.inactiveButtonClass);
+  buttonElement.setAttribute('disabled', 'disabled');
+};
+
 function toggleButtonState(inputList, buttonElement, configObj) {
   if (hasInvalidInput(inputList)) {
-      buttonElement.classList.add(configObj.inactiveButtonClass);
-      buttonElement.setAttribute('disabled', 'disabled');
+    disableSubmitButton(buttonElement, configObj);
   } else {
-      buttonElement.classList.remove(configObj.inactiveButtonClass);
-      buttonElement.removeAttribute('disabled', 'disabled')
+    enableSubmitButton(buttonElement, configObj);
   }
 };
 
@@ -56,7 +64,10 @@ function setEventListeners(formElement, configObj) {
       toggleButtonState(inputsList, submitButton, configObj);
     });
   });
-}
+  formElement.addEventListener('reset', () => {
+    disableSubmitButton(submitButton, configObj)
+  });
+};
 
 // Общая функция включения валидации форм на страницах
 export function enableValidation(configObj) {
@@ -68,4 +79,4 @@ export function enableValidation(configObj) {
     });
     setEventListeners(form, configObj);
   }); 
-}
+};

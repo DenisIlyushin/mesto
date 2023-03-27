@@ -10,7 +10,6 @@ const validationConfig = {
   inputErrorClass: 'form__input_type_error',
   errorClass: 'form__input-error_active'
 }
-const popupsCloseButtonElement = document.querySelectorAll('.popup__close-button');
 const popupOverlays = document.querySelectorAll('.popup')
 
 // константы блока "Работа с формой профиля"
@@ -27,7 +26,7 @@ const profileAddButtonElement = document.querySelector('.profile__add-button');
 const popupMestoElement = document.querySelector('.popup_type_add-mesto');
 const popupMestoFormElement = popupMestoElement.querySelector('.form');
 const popupMestoNameInput = popupMestoFormElement.querySelector('.form__input_type_mesto-heading');
-const popupMestoUrlInput = popupMestoFormElement.querySelector('.form__input_type_mesto-url');;
+const popupMestoUrlInput = popupMestoFormElement.querySelector('.form__input_type_mesto-url');
 
 // Константы блока "Работа с увеличенным изображением Места"
 const popupMestoImageElement = document.querySelector('.popup_type_show-mesto');
@@ -124,7 +123,7 @@ popupUserFormElement.addEventListener('submit', function (event) {
 profileAddButtonElement.addEventListener('click', () => {
   showPopup(popupMestoElement);
 });
-popupMestoFormElement.addEventListener('submit', function (event) {
+popupMestoFormElement.addEventListener('submit', function(event) {
   event.preventDefault();
   const mesto = {
     link: popupMestoUrlInput.value,
