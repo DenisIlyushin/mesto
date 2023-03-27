@@ -62,7 +62,7 @@ function renderMesto(mestoObj) {
   placesContainer.prepend(mestoObj);
 }
 
-// создать каторчку
+// создать карточку
 function addMesto(mestoObj) {
   const mesto = mestoTemplate.cloneNode(true);
   const mestoImage = mesto.querySelector('.mesto__image');
