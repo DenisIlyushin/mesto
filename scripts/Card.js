@@ -1,5 +1,3 @@
-import { renderImagePopup } from "./index.js";
-
 export default class Card {
 //   Класс карточки места
 
@@ -15,7 +13,7 @@ export default class Card {
       likeButton: this._mestoElement.querySelector('.mesto__like-button'),
       deleteButton: this._mestoElement.querySelector('.mesto__delete-button'),
     };
-    this._popupFunction = popupFunction || renderImagePopup;
+    this._popupFunction = popupFunction;
   };
 
   _getTemplateElement(templateSelector) {

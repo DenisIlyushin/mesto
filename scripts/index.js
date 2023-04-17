@@ -1,6 +1,7 @@
 import {initialCards} from './initialCards.js';
-import enableValidation from './validate.js';
 import Card from "./Card.js";
+import FormValidator from "./FormValidator.js";
+
 
 // Константы страницы
 const validationConfig = {
@@ -22,6 +23,7 @@ const popupUserNameInput = popupUserFormElement.querySelector('.form__input_type
 const popupUserJobInput = popupUserFormElement.querySelector('.form__input_type_user-job')
 const userNameElement = document.querySelector('.profile__user-name');
 const userJobElement = document.querySelector('.profile__user-job');
+const userFormValidator = new FormValidator(popupUserFormElement, validationConfig);
 
 // константы блока "Работа с формой карточки места"
 const profileAddButtonElement = document.querySelector('.profile__add-button');
@@ -29,6 +31,7 @@ const popupMestoElement = document.querySelector('.popup_type_add-mesto');
 const popupMestoFormElement = popupMestoElement.querySelector('.form');
 const popupMestoNameInput = popupMestoFormElement.querySelector('.form__input_type_mesto-heading');
 const popupMestoUrlInput = popupMestoFormElement.querySelector('.form__input_type_mesto-url');
+const mestoFormValidator = new FormValidator(popupMestoFormElement, validationConfig);
 
 // Константы блока "Работа с увеличенным изображением Места"
 const popupMestoImageElement = document.querySelector('.popup_type_show-mesto');
@@ -68,7 +71,7 @@ export function renderImagePopup(mestoObj) {
 }
 
 function addMesto(mestoObj) {
-  const mesto = new Card(mestoObj, '.template_type_mesto')
+  const mesto = new Card(mestoObj, '.template_type_mesto', renderImagePopup)
 
   return mesto.make();
 }
@@ -90,7 +93,9 @@ popupOverlays.forEach((overlay) => overlay.addEventListener(
 );
 
 // обработка формы редактирования профиля
+userFormValidator.enableValidation();
 profileEditButtonElement.addEventListener('click', function () {
+  userFormValidator.resetValidation();
   popupUserNameInput.value = userNameElement.textContent;
   popupUserJobInput.value = userJobElement.textContent;
   showPopup(popupUserElement);
@@ -103,6 +108,7 @@ popupUserFormElement.addEventListener('submit', function (event) {
 });
 
 // обработка формы добавления карточки
+mestoFormValidator.enableValidation();
 profileAddButtonElement.addEventListener('click', () => {
   showPopup(popupMestoElement);
 });
@@ -114,11 +120,9 @@ popupMestoFormElement.addEventListener('submit', function(event) {
   };
   renderMesto(addMesto(mesto));
   popupMestoFormElement.reset();
+  mestoFormValidator.resetValidation()
   hidePopup(popupMestoElement);
 });
 
 // наполнение страницы шаблонными карточками мест
 placeInitialDataOnPage(initialCards);
-
-// включение валидации
-enableValidation(validationConfig);
