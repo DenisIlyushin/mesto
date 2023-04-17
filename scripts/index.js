@@ -12,6 +12,7 @@ const validationConfig = {
   errorClass: 'form__input-error_active'
 }
 const popupOverlays = document.querySelectorAll('.popup')
+const placesContainer = document.querySelector('.places__list');
 
 // константы блока "Работа с формой профиля"
 const profileEditButtonElement = document.querySelector('.profile__edit-button');
@@ -34,8 +35,6 @@ const popupMestoImageElement = document.querySelector('.popup_type_show-mesto');
 const popupMestoImageSource = popupMestoImageElement.querySelector('.popup__image-popup');
 const popupMestoImageTitle = popupMestoImageElement.querySelector('.popup__heading-popup');
 
-// Первоначальная начинка страница по темплейту
-const placesContainer = document.querySelector('.places__list');
 
 // Универсальные функции вызова и сокрытия попапа
 function hidePopupOnEsc(event) {
