@@ -1,5 +1,6 @@
-import { initialCards } from './cards.js';
-import { enableValidation } from './validate.js';
+import {initialCards} from './initialCards.js';
+import enableValidation from './validate.js';
+import Card from "./Card.js";
 
 // Константы страницы
 const validationConfig = {
@@ -35,8 +36,6 @@ const popupMestoImageTitle = popupMestoImageElement.querySelector('.popup__headi
 
 // Первоначальная начинка страница по темплейту
 const placesContainer = document.querySelector('.places__list');
-const mestoTemplate = document.querySelector('.template_type_mesto').content.querySelector('.mesto');
-
 
 // Универсальные функции вызова и сокрытия попапа
 function hidePopupOnEsc(event) {
@@ -46,7 +45,7 @@ function hidePopupOnEsc(event) {
   }
 }
 
-function showPopup(popupElement) {
+export function showPopup(popupElement) {
   popupElement.classList.add('popup_opened');
   document.addEventListener('keyup', hidePopupOnEsc);
 }
@@ -57,37 +56,22 @@ function hidePopup(popupElement) {
 }
 
 // добавить карточку на страницу
-function renderMesto(mestoObj) {
-  placesContainer.prepend(mestoObj);
+function renderMesto(mestoElement) {
+  placesContainer.prepend(mestoElement);
 }
 
 // создать карточку
-function addMesto(mestoObj) {
-  const mesto = mestoTemplate.cloneNode(true);
-  const mestoImage = mesto.querySelector('.mesto__image');
-  const mestoTitle = mesto.querySelector('.mesto__heading');
+export function renderImagePopup(mestoObj) {
+  popupMestoImageSource.src = mestoObj.link;
+  popupMestoImageSource.alt = `Фотография ${mestoObj.name}`;
+  popupMestoImageTitle.textContent = mestoObj.name;
+  showPopup(popupMestoImageElement);
+};
 
-  mestoImage.src = mestoObj.link;
-  mestoImage.alt = `Фотография ${mestoObj.name}`;
-  mestoTitle.textContent = mestoObj.name;
-  // добавляет слушателя на кнопку лайка
-  mesto.querySelector('.mesto__like-button').addEventListener(
-    'click', (event) => {
-      event.target.classList.toggle("mesto__like-button_liked");
-    });
-  // добавляет слушателя на кнопку удаления карточки
-  mesto.querySelector('.mesto__delete-button').addEventListener(
-    'click', (event) => {
-      event.target.parentElement.remove();
-    });
-  // добавляет слушателя на фотографию места
-  mestoImage.addEventListener('click', function () {
-    popupMestoImageSource.src = mestoObj.link;
-    popupMestoImageSource.alt = `Фотография ${mestoObj.name}`;
-    popupMestoImageTitle.textContent = mestoObj.name;
-    showPopup(popupMestoImageElement);
-  });
-  return mesto;
+function addMesto(mestoObj) {
+  const mesto = new Card(mestoObj, '.template_type_mesto')
+
+  return mesto.make();
 }
 
 // добавляет первые карточки при загрузке страницы
