@@ -66,7 +66,7 @@ export function renderImagePopup(mestoObj) {
   popupMestoImageSource.alt = `Фотография ${mestoObj.name}`;
   popupMestoImageTitle.textContent = mestoObj.name;
   showPopup(popupMestoImageElement);
-};
+}
 
 function addMesto(mestoObj) {
   const mesto = new Card(mestoObj, '.template_type_mesto')
