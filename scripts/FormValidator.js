@@ -3,8 +3,11 @@ export default class FormValidator {
   constructor(formElement, configObj) {
     this._formElement = formElement;
     this._config = configObj;
-    this._inputsList = Array.from(this._formElement.querySelectorAll(this._config.inputSelector));
-    this._submitButton = this._formElement.querySelector(this._config.submitButtonSelector);
+    this._inputsList = Array.from(
+      this._formElement.querySelectorAll(this._config.inputSelector)
+    );
+    this._submitButton = this._formElement
+      .querySelector(this._config.submitButtonSelector);
 
   }
 
@@ -33,7 +36,8 @@ export default class FormValidator {
   };
 
   _hideInputError(inputElement) {
-    const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
+    const errorElement = this._formElement
+      .querySelector(`.${inputElement.id}-error`);
 
     inputElement.classList.remove(this._config.inputErrorClass);
     errorElement.classList.remove(this._config.errorClass);
@@ -41,7 +45,8 @@ export default class FormValidator {
   };
 
   _showInputError(inputElement, errorMessage) {
-    const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
+    const errorElement = this._formElement
+      .querySelector(`.${inputElement.id}-error`);
 
     inputElement.classList.add(this._config.inputErrorClass);
     errorElement.classList.add(this._config.errorClass);

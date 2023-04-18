@@ -71,7 +71,11 @@ export function renderImagePopup(mestoObj) {
 }
 
 function addMesto(mestoObj) {
-  const mesto = new Card(mestoObj, '.template_type_mesto', renderImagePopup)
+  const mesto = new Card(
+    mestoObj,
+    '.template_type_mesto',
+    renderImagePopup
+  )
 
   return mesto.make();
 }
