@@ -99,9 +99,9 @@ popupOverlays.forEach((overlay) => overlay.addEventListener(
 // обработка формы редактирования профиля
 userFormValidator.enableValidation();
 profileEditButtonElement.addEventListener('click', function () {
-  userFormValidator.resetValidation();
   popupUserNameInput.value = userNameElement.textContent;
   popupUserJobInput.value = userJobElement.textContent;
+  userFormValidator.resetValidation();
   showPopup(popupUserElement);
 });
 popupUserFormElement.addEventListener('submit', function (event) {
