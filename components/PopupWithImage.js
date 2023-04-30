@@ -11,10 +11,10 @@ export default class PopupWithImage extends Popup {
     this.#imageTitle = this.#popup.querySelector('.popup__heading-popup');
   };
 
-  open(mestoObj) {
-    this.#imageSource.src = mestoObj.link;
-    this.#imageSource.alt = `Фотография ${mestoObj.name}`;
-    this.#imageTitle.textContent = mestoObj.name;
+  open({ name, link }) {
+    this.#imageSource.src = link;
+    this.#imageSource.alt = `Фотография ${name}`;
+    this.#imageTitle.textContent = name;
     super.open()
   };
 }
