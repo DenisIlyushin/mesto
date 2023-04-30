@@ -1,9 +1,11 @@
-# Папки, создаваемые средой разработки
+# IDE
 .idea
 .vscode/
 *.code-workspace
 .DS_Store
 .AppleDouble
 .LSOverride
-# Папки, создаваемые мной при разработке с материалами макета
+# Dev
+node_modules
+dist
 .junk
