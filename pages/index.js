@@ -72,9 +72,11 @@ export function renderImagePopup(mestoObj) {
 
 function addMesto(mestoObj) {
   const mesto = new Card(
-    mestoObj,
+    {
+      dataObj: mestoObj,
+      handleCardClick: renderImagePopup
+    },
     '.template_type_mesto',
-    renderImagePopup
   )
 
   return mesto.make();
@@ -90,7 +92,7 @@ function placeInitialDataOnPage(initialMestoList) {
 // обработка закрытия попапов при клике по оверлею или кнопке закрытия
 popupOverlays.forEach((overlay) => overlay.addEventListener(
   'mousedown', (event) => {
-  if (event.target.classList.contains('popup_opened') 
+  if (event.target.classList.contains('popup_opened')
   || event.target.classList.contains('popup__close-button')) {
     hidePopup(event.target.closest('.popup'));
   }})

@@ -1,19 +1,22 @@
 export default class Card {
-//   Класс карточки места
+  #data
+  #element
+  #innerElements
+  #handlePopup
 
-  constructor(dataObj, templateSelector, popupFunction) {
-    this._data = {
+  constructor({ dataObj, handleCardClick }, templateSelector) {
+    this.#data = {
       name: dataObj.name,
       link: dataObj.link
     };
-    this._mestoElement = this._getTemplateElement(templateSelector);
-    this._elements = {
-      image: this._mestoElement.querySelector('.mesto__image'),
-      title: this._mestoElement.querySelector('.mesto__heading'),
-      likeButton: this._mestoElement.querySelector('.mesto__like-button'),
-      deleteButton: this._mestoElement.querySelector('.mesto__delete-button'),
+    this.#element = this._getTemplateElement(templateSelector);
+    this.#innerElements = {
+      image: this.#element.querySelector('.mesto__image'),
+      title: this.#element.querySelector('.mesto__heading'),
+      likeButton: this.#element.querySelector('.mesto__like-button'),
+      deleteButton: this.#element.querySelector('.mesto__delete-button'),
     };
-    this._popupFunction = popupFunction;
+    this.#handlePopup = handleCardClick;
   };
 
   _getTemplateElement(templateSelector) {
@@ -26,37 +29,38 @@ export default class Card {
   };
 
   _openInPopup() {
-    this._popupFunction(this._data);
+    this.#handlePopup(this.#data);
   };
 
   _toggleLike() {
     // управляет статусом кнопки лайка
-    this._elements.likeButton
+    this.#innerElements.likeButton
       .classList.toggle("mesto__like-button_liked");
   }
 
   _delete() {
     // удаляет карточку места
-    this._mestoElement.remove();
-    this._elements = null;
+    this.#element.remove();
+    this.#innerElements = null;
   };
 
   _setEventsListeners() {
     // добавляет слушателей события к карточке
-    this._elements.likeButton
+    this.#innerElements.likeButton
       .addEventListener('click', () => {this._toggleLike()});
-    this._elements.deleteButton
+    this.#innerElements.deleteButton
       .addEventListener('click', () => {this._delete()});
-    this._elements.image
+    this.#innerElements.image
       .addEventListener('click', () => {this._openInPopup()});
   }
 
   make() {
     // возвращает готовый элемент карточки места
-    this._elements.image.src = this._data.link;
-    this._elements.image.alt = `Фотография ${this._data.name}`;
-    this._elements.title.textContent = this._data.name;
+    this.#innerElements.image.src = this.#data.link;
+    this.#innerElements.image.alt = `Фотография ${this.#data.name}`;
+    this.#innerElements.title.textContent = this.#data.name;
     this._setEventsListeners();
-    return this._mestoElement
+
+    return this.#element
   }
 }
