@@ -13,7 +13,7 @@ export default class PopupWithForm extends Popup {
     this.#inputs = this.#form.querySelectorAll('.form__input');
   };
 
-  #getInputValues() {
+  #getInputValues() { // todo подозрительно не используется пока
     this.#inputs.forEach((input) => {
       this.#data[input.name] = input.value;
     });
