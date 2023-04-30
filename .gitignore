@@ -1,11 +1,11 @@
 # IDE
 .idea
-.vscode/
+.vscode
 *.code-workspace
 .DS_Store
 .AppleDouble
 .LSOverride
 # Dev
-node_modules
-dist
-.junk
+/node_modules/
+/dist/
+/.junk/
