@@ -3,9 +3,9 @@ export default class Section {
   #renderer;
   #container;
 
-  constructor({items, renderer}, containerSelector) {
+  constructor({ items, rendererCallback }, containerSelector) {
     this.#items = items;
-    this.#renderer = renderer;
+    this.#renderer = rendererCallback;
     this.#container = document.querySelector(containerSelector);
   };
 
