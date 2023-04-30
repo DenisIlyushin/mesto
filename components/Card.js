@@ -9,7 +9,7 @@ export default class Card {
       name: dataObj.name,
       link: dataObj.link
     };
-    this.#element = this._getTemplateElement(templateSelector);
+    this.#element = this.#getTemplateElement(templateSelector);
     this.#innerElements = {
       image: this.#element.querySelector('.mesto__image'),
       title: this.#element.querySelector('.mesto__heading'),
@@ -19,7 +19,7 @@ export default class Card {
     this.#handlePopup = handleCardClick;
   };
 
-  _getTemplateElement(templateSelector) {
+  #getTemplateElement(templateSelector) {
     // возвращает готовый элемент по шаблону
     return document
       .querySelector(templateSelector)
@@ -28,30 +28,30 @@ export default class Card {
       .cloneNode(true);
   };
 
-  _openInPopup() {
+  #openInPopup() {
     this.#handlePopup(this.#data);
   };
 
-  _toggleLike() {
+  #toggleLike() {
     // управляет статусом кнопки лайка
     this.#innerElements.likeButton
       .classList.toggle("mesto__like-button_liked");
   }
 
-  _delete() {
+  #delete() {
     // удаляет карточку места
     this.#element.remove();
     this.#innerElements = null;
   };
 
-  _setEventsListeners() {
+  #setEventsListeners() {
     // добавляет слушателей события к карточке
     this.#innerElements.likeButton
-      .addEventListener('click', () => {this._toggleLike()});
+      .addEventListener('click', () => {this.#toggleLike()});
     this.#innerElements.deleteButton
-      .addEventListener('click', () => {this._delete()});
+      .addEventListener('click', () => {this.#delete()});
     this.#innerElements.image
-      .addEventListener('click', () => {this._openInPopup()});
+      .addEventListener('click', () => {this.#openInPopup()});
   }
 
   make() {
@@ -59,7 +59,7 @@ export default class Card {
     this.#innerElements.image.src = this.#data.link;
     this.#innerElements.image.alt = `Фотография ${this.#data.name}`;
     this.#innerElements.title.textContent = this.#data.name;
-    this._setEventsListeners();
+    this.#setEventsListeners();
 
     return this.#element
   }
