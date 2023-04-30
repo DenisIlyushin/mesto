@@ -6,7 +6,8 @@ export default class UserInfo {
     this.#userName = document.querySelector(userNameSelector);
     this.#userJob = document.querySelector(userJobSelector);
   };
-  // todo обновление значений textcontent => #data? https://app.pachca.com/chats/3916083?message=48620375
+  // todo обновление значений textcontent => #data?
+  //  https://app.pachca.com/chats/3916083?message=48620375
   getUserInfo() {
     return {
       name: this.#userName.textContent,
