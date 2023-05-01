@@ -35,7 +35,7 @@ export default class Card {
   #toggleLike() {
     // управляет статусом кнопки лайка
     this.#innerElements.likeButton
-      .classList.toggle("mesto__like-button_liked");
+      .classList.toggle('mesto__like-button_liked');
   }
 
   #delete() {
