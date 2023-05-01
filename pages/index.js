@@ -24,6 +24,7 @@ const userFormValidator = new FormValidator(
   validationConfig
 );
 userFormValidator.enableValidation()
+
 const editProfilePopup = new PopupWithForm({
   formSubmitCallback: (data) => {
     userProfile.setUserInfo(data)
@@ -31,8 +32,34 @@ const editProfilePopup = new PopupWithForm({
   }
 }, indexPageSelectors.popupUser);
 editProfilePopup.setEventListeners();
+
 profileEditButtonElement.addEventListener('click', function () {
   editProfilePopup.setInputValues({ data: userProfile.getUserInfo() });
   userFormValidator.resetValidation();
   editProfilePopup.open()
 });
+
+// обработка начального наполнения карточек
+function addMesto(mestoObj) {
+  const mesto = new Card(
+    {
+      dataObj: mestoObj,
+      handleCardClick: (mestoObj) => {
+        mestoViewPopup.open({ data: mestoObj })
+      }
+    }, indexPageSelectors.mestoTemplate,
+  )
+  return mesto.make();
+}
+
+const mestoViewPopup = new PopupWithImage(indexPageSelectors.popupMestoImage);
+mestoViewPopup.setEventListeners();
+
+const mestoSection = new Section({
+  items: initialCards,
+  rendererCallback: (mestoObj) => {
+    mestoSection.addItem( addMesto(mestoObj) );
+  }
+}, indexPageSelectors.placesContainer);
+mestoSection.renderItems();
+

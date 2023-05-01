@@ -36,8 +36,10 @@ export const validationConfig = {
 
 export const indexPageSelectors = {
   placesContainer: '.places__list',
+  mestoTemplate: '.template_type_mesto',
   popupUser: '.popup_type_edit-profile',
   popupMesto: '.popup_type_add-mesto',
+  popupMestoImage: '.popup_type_show-mesto',
   userName: '.profile__user-name',
   userJob: '.profile__user-job'
 }
