@@ -4,14 +4,14 @@ import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import Section from '../components/Section.js';
 import UserInfo from '../components/UserInfo.js';
-
 import {
   initialCards,
   validationConfig,
   indexPageSelectors,
-  profileEditButtonElement,
   popupUserFormElement,
-
+  popupMestoFormElement,
+  profileEditButtonElement,
+  profileAddButtonElement
 } from '../utils/constants.js';
 
 // обработка формы редактирования профиля
@@ -34,7 +34,7 @@ const editProfilePopup = new PopupWithForm({
 editProfilePopup.setEventListeners();
 
 profileEditButtonElement.addEventListener('click', function () {
-  editProfilePopup.setInputValues({ data: userProfile.getUserInfo() });
+  editProfilePopup.setInputValues( {data: userProfile.getUserInfo()} );
   userFormValidator.resetValidation();
   editProfilePopup.open()
 });
@@ -45,7 +45,7 @@ function addMesto(mestoObj) {
     {
       dataObj: mestoObj,
       handleCardClick: (mestoObj) => {
-        mestoViewPopup.open({ data: mestoObj })
+        mestoViewPopup.open({data: mestoObj})
       }
     }, indexPageSelectors.mestoTemplate,
   )
@@ -63,3 +63,22 @@ const mestoSection = new Section({
 }, indexPageSelectors.placesContainer);
 mestoSection.renderItems();
 
+// обработка добавления новой карточки места
+const addMestoValidator = new FormValidator(
+  popupMestoFormElement,
+  validationConfig
+);
+addMestoValidator.enableValidation()
+
+const addMestoPopup = new PopupWithForm({
+  formSubmitCallback: (mestoObj) => {
+    mestoSection.addItem( addMesto(mestoObj) );
+    addMestoPopup.close();
+  },
+}, indexPageSelectors.popupMesto);
+addMestoPopup.setEventListeners();
+
+profileAddButtonElement.addEventListener('click', () => {
+  addMestoValidator.resetValidation();
+  addMestoPopup.open();
+});

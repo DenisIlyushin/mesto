@@ -45,7 +45,8 @@ export const indexPageSelectors = {
 }
 
 const popupUserElement = document.querySelector('.popup_type_edit-profile')
+const popupMestoElement = document.querySelector('.popup_type_add-mesto');
 export const popupUserFormElement = popupUserElement.querySelector('.form');
 export const profileEditButtonElement = document.querySelector('.profile__edit-button');
-// const popupUserNameInput = popupUserFormElement.querySelector('.form__input_type_username')
-// const popupUserJobInput = popupUserFormElement.querySelector('.form__input_type_user-job')
+export const popupMestoFormElement = popupMestoElement.querySelector('.form');
+export const profileAddButtonElement = document.querySelector('.profile__add-button');
