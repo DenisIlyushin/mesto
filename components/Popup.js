@@ -10,14 +10,14 @@ export default class Popup {
     }
   };
 
-  open() {
-    this._popup.classList.add('popup_opened');
-    document.addEventListener('keyup', this.#handleCloseOnEsc);
-  };
-
   close() {
     this._popup.classList.remove('popup_opened');
     document.removeEventListener('keyup', this.#handleCloseOnEsc);
+  };
+
+  open() {
+    this._popup.classList.add('popup_opened');
+    document.addEventListener('keyup', this.#handleCloseOnEsc);
   };
 
   setEventListeners() {
