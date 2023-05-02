@@ -7,7 +7,7 @@
   height: 32px;
   border: none;
   background-color: var(--popup_background--color);
-  background-image: url('../../../images/close-button.svg');
+  background-image: url('imagesg');
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;

@@ -6,7 +6,7 @@
   box-sizing: border-box;
   background-color: transparent;
   border: 1px solid var(--font-color-light, #fff);
-  background-image: url('../../../images/edit-button.svg');
+  background-image: url('images');
   background-size: 10px;
   background-position: center;
   background-repeat: no-repeat;
