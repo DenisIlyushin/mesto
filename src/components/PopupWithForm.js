@@ -4,7 +4,6 @@ export default class PopupWithForm extends Popup {
   #submitHandler
   #form
   #inputs
-  #data = {}
 
   constructor({ formSubmitCallback }, popupSelector) {
     super(popupSelector);
@@ -14,10 +13,11 @@ export default class PopupWithForm extends Popup {
   };
 
   #getInputValues() {
+    const data = {};
     this.#inputs.forEach((input) => {
-      this.#data[input.name] = input.value;
+      data[input.name] = input.value;
     });
-    return this.#data;
+    return data;
   };
 
   setInputValues({ data }) {
