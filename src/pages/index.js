@@ -58,12 +58,11 @@ const mestoViewPopup = new PopupWithImage(indexPageSelectors.popupMestoImage);
 mestoViewPopup.setEventListeners();
 
 const mestoSection = new Section({
-  items: initialCards,
   rendererCallback: (mestoObj) => {
     mestoSection.addItem( addMesto(mestoObj) );
   }
 }, indexPageSelectors.placesContainer);
-mestoSection.renderItems();
+mestoSection.renderItems(initialCards);
 
 // обработка добавления новой карточки места
 const addMestoValidator = new FormValidator(
