@@ -10,9 +10,8 @@ class Api {
   #handleResponse(response) {
     if (response.ok) {
       return response.json();
-    } else {
-      return Promise.reject(`Ошибка: ${response.status}`);
     }
+    return Promise.reject(`Ошибка: ${response.status}`);
   }
 
   #handleError(error) {
@@ -27,16 +26,6 @@ class Api {
       .then(this.#handleResponse)
       .catch(this.#handleError);
   }
-
-  // brokenGetUserInfo() {
-  //   return fetch(
-  //     `${this.#baseUrl}/users/mer`,
-  //     {headers: this.#headers}
-  //   )
-  //     .then(this.#handleResponse)
-  //     .catch(this.#handleError);
-  // }
-
 }
 
 const api = new Api({
@@ -48,13 +37,7 @@ const api = new Api({
 })
 
 api.getUserInfo()
-  .then(console.log)
+  .then((userInfo) => {
+    console.log(userInfo)
+  })
   .catch(console.log)
-
-// api.brokenGetUserInfo()
-//   .then((userInfo) => {
-//     console.log(userInfo)
-//   })
-//   .catch((error) => {
-//     console.log(error)
-//   })
