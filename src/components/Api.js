@@ -1,4 +1,4 @@
-class Api {
+export default class Api {
   #baseUrl;
   #headers;
 
@@ -34,24 +34,40 @@ class Api {
       .then(this.#handleResponse)
       .catch(this.#handleError);
   }
+
+  setUserInfo(obj) {
+    return fetch(`${this.#baseUrl}/users/me`, {
+      method: 'PATCH',
+      headers: this.#headers,
+      body: JSON.stringify({
+        name: obj.userName,
+        about: obj.userJob
+      }),
+    }).then(this.#handleResponse)
+  }
+
 }
 
-function test() {
-  // попытка unit-теста
-  const api = new Api({
-    baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-66',
-    headers: {
-      authorization: 'dc6a4a93-0c58-4e81-85df-4663aee25693',
-      'Content-Type': 'application/json',
-    },
-  })
-
-  Promise.all([
-    api.getUserInfo(),
-    api.getCards()
-  ])
-    .then( console.log)
-    .catch(console.log)
-}
-
-test()
+// function test() {
+//   // попытка unit-теста
+//   const api = new Api({
+//     baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-66',
+//     headers: {
+//       authorization: 'dc6a4a93-0c58-4e81-85df-4663aee25693',
+//       'Content-Type': 'application/json',
+//     },
+//   })
+//
+//   Promise.all([
+//     api.getUserInfo(),
+//     api.setUserInfo({
+//       userName: 'Ден Илюшин',
+//       userJob: 'Студент Я.Практикума'
+//     }),
+//     // api.getCards(),
+//   ])
+//     .then(console.log)
+//     .catch(console.log)
+// }
+//
+// test()

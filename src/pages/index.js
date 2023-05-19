@@ -1,11 +1,13 @@
 import './index.css'
 
+import Api from '../components/Api.js'
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import Section from '../components/Section.js';
 import UserInfo from '../components/UserInfo.js';
+
 import {
   initialCards,
   validationConfig,
@@ -15,6 +17,8 @@ import {
   profileEditButtonElement,
   profileAddButtonElement
 } from '../utils/constants.js';
+
+let myID;
 
 // обработка формы редактирования профиля
 const userProfile = new UserInfo({
@@ -83,3 +87,20 @@ profileAddButtonElement.addEventListener('click', () => {
   addMestoValidator.resetValidation();
   addMestoPopup.open();
 });
+
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-66',
+  headers: {
+    authorization: 'dc6a4a93-0c58-4e81-85df-4663aee25693',
+    'Content-Type': 'application/json',
+  },
+})
+
+Promise.all([api.getUserInfo(), api.getCards()])
+  .then(([userInfo, cards]) => {
+    console.log(userInfo);
+    myID = userInfo._id;
+    // editProfilePopup.setUserInfo(userInfo)
+    console.log(cards)
+  })
+  .catch(console.log);
