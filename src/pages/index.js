@@ -53,12 +53,6 @@ const userFormValidator = new FormValidator(
   validationConfig
 );
 userFormValidator.enableValidation()
-const userAvatarFormValidator = new FormValidator(
-  avatarFormElement,
-  validationConfig
-)
-userAvatarFormValidator.enableValidation()
-
 
 const editProfilePopup = new PopupWithForm({
   formSubmitCallback: (data) => {
@@ -83,6 +77,18 @@ const editProfilePopup = new PopupWithForm({
 }, indexPageSelectors.popupUser);
 editProfilePopup.setEventListeners();
 
+profileEditButtonElement.addEventListener('click', function () {
+  editProfilePopup.setInputValues({data: userProfile.getUserInfo()});
+  userFormValidator.resetValidation();
+  editProfilePopup.open()
+});
+
+const userAvatarFormValidator = new FormValidator(
+  avatarFormElement,
+  validationConfig
+)
+userAvatarFormValidator.enableValidation()
+
 const editAvatarPopup = new PopupWithForm({
   formSubmitCallback: (data) => {
     editAvatarPopup.loading(true, 'Обновление...')
@@ -104,12 +110,6 @@ const editAvatarPopup = new PopupWithForm({
   }
 }, indexPageSelectors.popupEditAvatar);
 editAvatarPopup.setEventListeners();
-
-profileEditButtonElement.addEventListener('click', function () {
-  editProfilePopup.setInputValues({data: userProfile.getUserInfo()});
-  userFormValidator.resetValidation();
-  editProfilePopup.open()
-});
 
 avatarEditButtonElement.addEventListener('click', function () {
   editAvatarPopup.setInputValues({data: userProfile.getUserInfo()});
