@@ -57,7 +57,7 @@ export default class Card {
       this.#innerElements.likeButton.classList.remove('mesto__like-button_liked');
     } else {
       this.#likeCallback(this.#data.cardID);
-      this.#innerElements.likeButton.classList.add('mesto__like-button_liked');;
+      this.#innerElements.likeButton.classList.add('mesto__like-button_liked');
     }
   };
 
