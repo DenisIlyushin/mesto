@@ -5,18 +5,18 @@ export default class Api {
   constructor(options) {
     this.#baseUrl = options.baseUrl;
     this.#headers = options.headers;
-  }
+  };
 
   #handleResponse(response) {
     if (response.ok) {
       return response.json();
     }
     return Promise.reject(`Ошибка: ${response.status}`);
-  }
+  };
 
   #handleError(error) {
     return error
-  }
+  };
 
   getCards() {
     return fetch(`${
@@ -24,7 +24,7 @@ export default class Api {
       {headers: this.#headers}
     )
       .then(this.#handleResponse);
-  }
+  };
 
   getUserInfo() {
     return fetch(
@@ -33,7 +33,7 @@ export default class Api {
     )
       .then(this.#handleResponse)
       .catch(this.#handleError);
-  }
+  };
 
   setUserInfo(obj) {
     return fetch(`${this.#baseUrl}/users/me`, {
@@ -44,8 +44,7 @@ export default class Api {
         about: obj.userJob
       }),
     }).then(this.#handleResponse)
-  }
-
+  };
 }
 
 // function test() {

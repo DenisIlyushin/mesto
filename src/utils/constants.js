@@ -41,7 +41,8 @@ export const indexPageSelectors = {
   popupMesto: '.popup_type_add-mesto',
   popupMestoImage: '.popup_type_show-mesto',
   userName: '.profile__user-name',
-  userJob: '.profile__user-job'
+  userJob: '.profile__user-job',
+  userAvatar: '.profile__avatar'
 }
 
 const popupUserElement = document.querySelector('.popup_type_edit-profile')

@@ -18,12 +18,11 @@ import {
   profileAddButtonElement
 } from '../utils/constants.js';
 
-let myID;
-
 // обработка формы редактирования профиля
 const userProfile = new UserInfo({
   userNameSelector: indexPageSelectors.userName,
-  userJobSelector: indexPageSelectors.userJob
+  userJobSelector: indexPageSelectors.userJob,
+  userAvatarSelector: indexPageSelectors.userAvatar
 });
 const userFormValidator = new FormValidator(
   popupUserFormElement,
@@ -66,7 +65,6 @@ const mestoSection = new Section({
     mestoSection.addItem( addMesto(mestoObj) );
   }
 }, indexPageSelectors.placesContainer);
-mestoSection.renderItems(initialCards);
 
 // обработка добавления новой карточки места
 const addMestoValidator = new FormValidator(
@@ -88,6 +86,9 @@ profileAddButtonElement.addEventListener('click', () => {
   addMestoPopup.open();
 });
 
+
+let myID;
+
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-66',
   headers: {
@@ -98,9 +99,13 @@ const api = new Api({
 
 Promise.all([api.getUserInfo(), api.getCards()])
   .then(([userInfo, cards]) => {
-    console.log(userInfo);
+    console.log(userInfo)
     myID = userInfo._id;
-    // editProfilePopup.setUserInfo(userInfo)
-    console.log(cards)
+    userProfile.setUserInfo({
+      name: userInfo.name,
+      job: userInfo.about,
+      avatar: userInfo.avatar
+    });
+    mestoSection.renderItems(cards);
   })
   .catch(console.log);
