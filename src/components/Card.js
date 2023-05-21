@@ -5,13 +5,19 @@ export default class Card {
   #innerElements
   #handlePopup
   #handleDelete
+  #likeCallback
+  #dislikeCallback
 
-  constructor({ dataObj, userID, zoomCardCallback, deleteCardCallback }, templateSelector) {
+  constructor(
+    {dataObj, userID, zoomCardCallback, deleteCardCallback, likeCallback, dislikeCallback },
+    templateSelector
+  ) {
     this.#data = {
       name: dataObj.name,
       link: dataObj.link,
-      likes: dataObj.likes.length,
+      likes: dataObj.likes,
       ownerID: dataObj.owner._id,
+      cardID: dataObj._id
     };
     this.#userID = userID;
     this.#element = this.#getTemplateElement(templateSelector);
@@ -24,6 +30,8 @@ export default class Card {
     };
     this.#handlePopup = zoomCardCallback;
     this.#handleDelete = deleteCardCallback;
+    this.#likeCallback = likeCallback;
+    this.#dislikeCallback = dislikeCallback;
   };
 
   #getTemplateElement(templateSelector) {
@@ -39,15 +47,35 @@ export default class Card {
     this.#handlePopup(this.#data);
   };
 
-  #toggleLike() {
-    // управляет статусом кнопки лайка
-    this.#innerElements.likeButton
-      .classList.toggle('mesto__like-button_liked');
-  }
-
   #handleCardDelete() {
     this.#handleDelete();
-  }
+  };
+
+  #handleLike() {
+    if (this.#innerElements.likeButton.classList.contains('mesto__like-button_liked')) {
+      this.#dislikeCallback(this.#data.cardID);
+      this.#innerElements.likeButton.classList.remove('mesto__like-button_liked');
+    } else {
+      this.#likeCallback(this.#data.cardID);
+      this.#innerElements.likeButton.classList.add('mesto__like-button_liked');;
+    }
+  };
+
+  #setEventsListeners() {
+    // добавляет слушателей события к карточке
+    this.#innerElements.likeButton
+      .addEventListener('click', () => {this.#handleLike()});
+    this.#innerElements.image
+      .addEventListener('click', () => {this.#openInPopup()});
+    // если не пользователь создал карточку, то убираем кнопку, или вешаем слушателя
+    if (this.#userID !== this.#data.ownerID) {
+      this.#innerElements.deleteButton.remove();
+      this.#innerElements.deleteButton = null;
+    } else {
+      this.#innerElements.deleteButton
+        .addEventListener('click', () => {this.#handleCardDelete()});
+    }
+  };
 
   delete() {
     // удаляет карточку места
@@ -55,32 +83,29 @@ export default class Card {
     this.#innerElements = null;
   };
 
-  #setEventsListeners() {
-    // добавляет слушателей события к карточке
-    this.#innerElements.likeButton
-      .addEventListener('click', () => {this.#toggleLike()});
-    this.#innerElements.deleteButton
-      .addEventListener('click', () => {this.#handleCardDelete()});
-    this.#innerElements.image
-      .addEventListener('click', () => {this.#openInPopup()});
-  }
+  setLikes({ likes }) {
+    this.#innerElements.likeCount.textContent = likes.length
+    likes.forEach((like) => {
+      if (like._id === this.#userID) {
+        this.#innerElements.likeButton.classList.add('mesto__like-button_liked');
+      }
+    })
+  };
 
   make() {
     // возвращает готовый элемент карточки места
     this.#innerElements.image.src = this.#data.link;
     this.#innerElements.image.alt = `Фотография ${this.#data.name}`;
     this.#innerElements.title.textContent = this.#data.name;
-    this.#innerElements.likeCount.textContent = this.#data.likes;
-    // если не пользователь создал карточку, то удаляем кнопку для удаления
-    if (this.#userID !== this.#data.ownerID) {
-      this.#innerElements.deleteButton.remove();
-    }
+    // ставим изначальное количество лайков
+    this.setLikes(this.#data);
     this.#setEventsListeners();
+
     // обработка карточек с "битыми" картинками.
     this.#innerElements.image.addEventListener('error', (event) => {
       console.log(`Ошибка загрузки ${event.target.src}. Карточка будет удалена.`)
       this.delete()
     })
     return this.#element
-  }
+  };
 }

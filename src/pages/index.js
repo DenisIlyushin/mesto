@@ -128,22 +128,36 @@ function addMesto(mestoObj) {
         mestoViewPopup.open({data: mestoObj})
       },
       deleteCardCallback: () => {
-        const deleteConfimationPopup = new PopupConfirm(
+        const deleteConfirmationPopup = new PopupConfirm(
           '.popup_type_delete-mesto',
           (cardID) => {
-            api.deleteCard( cardID )
+            api.deleteCard(cardID)
               .then(() => {
-                mesto.delete()
+                mesto.delete();
               })
               .catch(console.log)
               .finally(() => {
-                deleteConfimationPopup.close()
+                deleteConfirmationPopup.close();
               })
           }
         );
-        deleteConfimationPopup.setEventListeners()
-        deleteConfimationPopup.open(cardID);
+        deleteConfirmationPopup.setEventListeners();
+        deleteConfirmationPopup.open(cardID);
       },
+      likeCallback: (cardID) => {
+        api.likeCard(cardID)
+          .then((response) => {
+            mesto.setLikes(response);
+          })
+          .catch(console.log)
+      },
+      dislikeCallback: (cardID) => {
+        api.dislikeCard(cardID)
+          .then((response) => {
+            mesto.setLikes(response);
+          })
+          .catch(console.log)
+      }
     }, indexPageSelectors.mestoTemplate,
   )
   return mesto.make();
