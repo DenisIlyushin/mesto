@@ -35,7 +35,7 @@ export default class Api {
       .catch(this.#handleError);
   };
 
-  setUserInfo({name, about}) {
+  setUserInfo({ name, about }) {
     return fetch(`${this.#baseUrl}/users/me`, {
       method: 'PATCH',
       headers: this.#headers,
@@ -46,12 +46,23 @@ export default class Api {
     }).then(this.#handleResponse)
   };
 
-  setUserAvatar({avatar}) {
+  setUserAvatar({ avatar }) {
     return fetch(`${this.#baseUrl}/users/me/avatar`, {
       method: 'PATCH',
       headers: this.#headers,
       body: JSON.stringify({
         avatar: avatar
+      }),
+    }).then(this.#handleResponse)
+  };
+
+  createMesto({ name, link }) {
+    return fetch(`${this.#baseUrl}/cards`, {
+      method: 'POST',
+      headers: this.#headers,
+      body: JSON.stringify({
+        name: name,
+        link: link
       }),
     }).then(this.#handleResponse)
   }

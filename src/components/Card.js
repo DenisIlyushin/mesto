@@ -7,13 +7,15 @@ export default class Card {
   constructor({ dataObj, handleCardClick }, templateSelector) {
     this.#data = {
       name: dataObj.name,
-      link: dataObj.link
+      link: dataObj.link,
+      likes: dataObj.likes.length
     };
     this.#element = this.#getTemplateElement(templateSelector);
     this.#innerElements = {
       image: this.#element.querySelector('.mesto__image'),
       title: this.#element.querySelector('.mesto__heading'),
       likeButton: this.#element.querySelector('.mesto__like-button'),
+      likeCount: this.#element.querySelector('.mesto__like-count'),
       deleteButton: this.#element.querySelector('.mesto__delete-button'),
     };
     this.#handlePopup = handleCardClick;
@@ -59,8 +61,13 @@ export default class Card {
     this.#innerElements.image.src = this.#data.link;
     this.#innerElements.image.alt = `Фотография ${this.#data.name}`;
     this.#innerElements.title.textContent = this.#data.name;
+    this.#innerElements.likeCount.textContent = this.#data.likes;
     this.#setEventsListeners();
-
+    // обработка карточек с "битыми" картинками.
+    this.#innerElements.image.addEventListener('error', (event) => {
+      console.log(`Ошибка загрузки ${event.target.src}. Карточка будет удалена.`)
+      this.#delete()
+    })
     return this.#element
   }
 }

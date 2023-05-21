@@ -147,8 +147,16 @@ addMestoValidator.enableValidation()
 
 const addMestoPopup = new PopupWithForm({
   formSubmitCallback: (mestoObj) => {
-    mestoSection.addItem(addMesto(mestoObj));
-    addMestoPopup.close();
+    addMestoPopup.loading(true)
+    api.createMesto(mestoObj)
+      .then((response) => {
+        mestoSection.addItem(addMesto(response));
+        addMestoPopup.close();
+      })
+      .catch(console.log)
+      .finally(() => {
+        addMestoPopup.loading(false)
+      })
   },
 }, indexPageSelectors.popupMesto);
 addMestoPopup.setEventListeners();

@@ -46,8 +46,10 @@
 @import url(../blocks/mesto/__image/mesto__image.css);
 @import url(../blocks/mesto/__description/mesto__description.css);
 @import url(../blocks/mesto/__heading/mesto__heading.css);
+@import url(../blocks/mesto/__like-container/mesto__like-container.css);
 @import url(../blocks/mesto/__like-button/mesto__like-button.css);
 @import url(../blocks/mesto/__like-button/_liked/mesto__like-button_liked.css);
+@import url(../blocks/mesto/__like-count/mesto__like-count.css);
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
 @import url(../blocks/template/template.css);
