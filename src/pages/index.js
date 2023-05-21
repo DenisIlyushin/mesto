@@ -119,7 +119,6 @@ avatarEditButtonElement.addEventListener('click', function () {
 
 // обработка начального наполнения карточек
 function addMesto(mestoObj) {
-  // const cardID = mestoObj._id;
   const mesto = new Card(
     {
       dataObj: mestoObj,
