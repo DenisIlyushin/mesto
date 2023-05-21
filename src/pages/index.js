@@ -16,6 +16,7 @@ import {
   profileEditButtonElement,
   profileAddButtonElement, avatarFormElement, avatarEditButtonElement
 } from '../utils/constants.js';
+import PopupConfirm from '../components/PopupConfirm.js';
 
 // подключение к API
 let myID;
@@ -84,7 +85,7 @@ editProfilePopup.setEventListeners();
 
 const editAvatarPopup = new PopupWithForm({
   formSubmitCallback: (data) => {
-    editAvatarPopup.loading(true)
+    editAvatarPopup.loading(true, 'Обновление...')
     api.setUserAvatar({
       avatar: data.avatar,
     })
@@ -118,12 +119,31 @@ avatarEditButtonElement.addEventListener('click', function () {
 
 // обработка начального наполнения карточек
 function addMesto(mestoObj) {
+  const cardID = mestoObj._id;
   const mesto = new Card(
     {
       dataObj: mestoObj,
-      handleCardClick: (mestoObj) => {
+      userID: myID,
+      zoomCardCallback: (mestoObj) => {
         mestoViewPopup.open({data: mestoObj})
-      }
+      },
+      deleteCardCallback: () => {
+        const deleteConfimationPopup = new PopupConfirm(
+          '.popup_type_delete-mesto',
+          (cardID) => {
+            api.deleteCard( cardID )
+              .then(() => {
+                mesto.delete()
+              })
+              .catch(console.log)
+              .finally(() => {
+                deleteConfimationPopup.close()
+              })
+          }
+        );
+        deleteConfimationPopup.setEventListeners()
+        deleteConfimationPopup.open(cardID);
+      },
     }, indexPageSelectors.mestoTemplate,
   )
   return mesto.make();

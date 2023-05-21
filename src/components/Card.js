@@ -1,15 +1,19 @@
 export default class Card {
   #data
+  #userID
   #element
   #innerElements
   #handlePopup
+  #handleDelete
 
-  constructor({ dataObj, handleCardClick }, templateSelector) {
+  constructor({ dataObj, userID, zoomCardCallback, deleteCardCallback }, templateSelector) {
     this.#data = {
       name: dataObj.name,
       link: dataObj.link,
-      likes: dataObj.likes.length
+      likes: dataObj.likes.length,
+      ownerID: dataObj.owner._id,
     };
+    this.#userID = userID;
     this.#element = this.#getTemplateElement(templateSelector);
     this.#innerElements = {
       image: this.#element.querySelector('.mesto__image'),
@@ -18,7 +22,8 @@ export default class Card {
       likeCount: this.#element.querySelector('.mesto__like-count'),
       deleteButton: this.#element.querySelector('.mesto__delete-button'),
     };
-    this.#handlePopup = handleCardClick;
+    this.#handlePopup = zoomCardCallback;
+    this.#handleDelete = deleteCardCallback;
   };
 
   #getTemplateElement(templateSelector) {
@@ -40,7 +45,11 @@ export default class Card {
       .classList.toggle('mesto__like-button_liked');
   }
 
-  #delete() {
+  #handleCardDelete() {
+    this.#handleDelete();
+  }
+
+  delete() {
     // удаляет карточку места
     this.#element.remove();
     this.#innerElements = null;
@@ -51,7 +60,7 @@ export default class Card {
     this.#innerElements.likeButton
       .addEventListener('click', () => {this.#toggleLike()});
     this.#innerElements.deleteButton
-      .addEventListener('click', () => {this.#delete()});
+      .addEventListener('click', () => {this.#handleCardDelete()});
     this.#innerElements.image
       .addEventListener('click', () => {this.#openInPopup()});
   }
@@ -62,11 +71,15 @@ export default class Card {
     this.#innerElements.image.alt = `Фотография ${this.#data.name}`;
     this.#innerElements.title.textContent = this.#data.name;
     this.#innerElements.likeCount.textContent = this.#data.likes;
+    // если не пользователь создал карточку, то удаляем кнопку для удаления
+    if (this.#userID !== this.#data.ownerID) {
+      this.#innerElements.deleteButton.remove();
+    }
     this.#setEventsListeners();
     // обработка карточек с "битыми" картинками.
     this.#innerElements.image.addEventListener('error', (event) => {
       console.log(`Ошибка загрузки ${event.target.src}. Карточка будет удалена.`)
-      this.#delete()
+      this.delete()
     })
     return this.#element
   }

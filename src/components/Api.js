@@ -65,6 +65,13 @@ export default class Api {
         link: link
       }),
     }).then(this.#handleResponse)
+  };
+
+  deleteCard(id) {
+    return fetch(`${this.#baseUrl}/cards/${id}`, {
+      method: 'DELETE',
+      headers: this.#headers,
+    }).then(this.#handleResponse)
   }
 }
 

@@ -42,6 +42,16 @@
         <h2 class="popup__heading-popup"></h2>
       </div>
     </div>
+    <div class="popup popup_type_delete-mesto" id="deleteMesto">
+      <div class="popup__container">
+        <button class="popup__close-button" type="button"></button>
+        <form class="form" name="mestoDelete" autocomplete="off"
+              novalidate>
+          <h2 class="form__title">Вы уверены?</h2>
+          <button class="form__submit-button" type="submit">Да</button>
+        </form>
+      </div>
+    </div>
     <div class="popup popup_type_edit-profile" id="editProfile">
       <div class="popup__container">
         <button class="popup__close-button" type="button"></button>
@@ -76,7 +86,7 @@
                    minlength="2">
             <span class="form__input-error userAvatar-error"></span>
           </label>
-          <button class="form__submit-button" type="submit">Сохранить</button>
+          <button class="form__submit-button" type="submit">Обновить</button>
         </form>
       </div>
     </div>
