@@ -35,16 +35,26 @@ export default class Api {
       .catch(this.#handleError);
   };
 
-  setUserInfo(obj) {
+  setUserInfo({name, about}) {
     return fetch(`${this.#baseUrl}/users/me`, {
       method: 'PATCH',
       headers: this.#headers,
       body: JSON.stringify({
-        name: obj.userName,
-        about: obj.userJob
+        name: name,
+        about: about
       }),
     }).then(this.#handleResponse)
   };
+
+  setUserAvatar({avatar}) {
+    return fetch(`${this.#baseUrl}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: this.#headers,
+      body: JSON.stringify({
+        avatar: avatar
+      }),
+    }).then(this.#handleResponse)
+  }
 }
 
 // function test() {

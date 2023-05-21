@@ -9,16 +9,39 @@ import Section from '../components/Section.js';
 import UserInfo from '../components/UserInfo.js';
 
 import {
-  initialCards,
   validationConfig,
   indexPageSelectors,
   popupUserFormElement,
   popupMestoFormElement,
   profileEditButtonElement,
-  profileAddButtonElement
+  profileAddButtonElement, avatarFormElement, avatarEditButtonElement
 } from '../utils/constants.js';
 
-// обработка формы редактирования профиля
+// подключение к API
+let myID;
+
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-66',
+  headers: {
+    authorization: 'dc6a4a93-0c58-4e81-85df-4663aee25693',
+    'Content-Type': 'application/json',
+  },
+})
+
+Promise.all([api.getUserInfo(), api.getCards()])
+  .then(([userInfo, cards]) => {
+    myID = userInfo._id;
+    userProfile.setUserInfo({
+      name: userInfo.name,
+      job: userInfo.about,
+      avatar: userInfo.avatar
+    });
+    mestoSection.renderItems(cards);
+  })
+  .catch(console.log);
+
+
+// обработка форм редактирования профиля
 const userProfile = new UserInfo({
   userNameSelector: indexPageSelectors.userName,
   userJobSelector: indexPageSelectors.userJob,
@@ -29,19 +52,68 @@ const userFormValidator = new FormValidator(
   validationConfig
 );
 userFormValidator.enableValidation()
+const userAvatarFormValidator = new FormValidator(
+  avatarFormElement,
+  validationConfig
+)
+userAvatarFormValidator.enableValidation()
+
 
 const editProfilePopup = new PopupWithForm({
   formSubmitCallback: (data) => {
-    userProfile.setUserInfo(data)
-    editProfilePopup.close()
+    editProfilePopup.loading(true)
+    api.setUserInfo({
+      name: data.name,
+      about: data.job,
+    })
+      .then((response) => {
+        userProfile.setUserInfo({
+          name: response.name,
+          job: response.about,
+          avatar: response.avatar
+        })
+        editProfilePopup.close()
+      })
+      .catch(console.log)
+      .finally(() => {
+        editProfilePopup.loading(false)
+      })
   }
 }, indexPageSelectors.popupUser);
 editProfilePopup.setEventListeners();
 
+const editAvatarPopup = new PopupWithForm({
+  formSubmitCallback: (data) => {
+    editAvatarPopup.loading(true)
+    api.setUserAvatar({
+      avatar: data.avatar,
+    })
+      .then((response) => {
+        userProfile.setUserInfo({
+          name: response.name,
+          job: response.about,
+          avatar: response.avatar
+        })
+        editAvatarPopup.close()
+      })
+      .catch(console.log)
+      .finally(() => {
+        editAvatarPopup.loading(false)
+      })
+  }
+}, indexPageSelectors.popupEditAvatar);
+editAvatarPopup.setEventListeners();
+
 profileEditButtonElement.addEventListener('click', function () {
-  editProfilePopup.setInputValues( {data: userProfile.getUserInfo()} );
+  editProfilePopup.setInputValues({data: userProfile.getUserInfo()});
   userFormValidator.resetValidation();
   editProfilePopup.open()
+});
+
+avatarEditButtonElement.addEventListener('click', function () {
+  editAvatarPopup.setInputValues({data: userProfile.getUserInfo()});
+  userFormValidator.resetValidation();
+  editAvatarPopup.open()
 });
 
 // обработка начального наполнения карточек
@@ -62,7 +134,7 @@ mestoViewPopup.setEventListeners();
 
 const mestoSection = new Section({
   rendererCallback: (mestoObj) => {
-    mestoSection.addItem( addMesto(mestoObj) );
+    mestoSection.addItem(addMesto(mestoObj));
   }
 }, indexPageSelectors.placesContainer);
 
@@ -75,7 +147,7 @@ addMestoValidator.enableValidation()
 
 const addMestoPopup = new PopupWithForm({
   formSubmitCallback: (mestoObj) => {
-    mestoSection.addItem( addMesto(mestoObj) );
+    mestoSection.addItem(addMesto(mestoObj));
     addMestoPopup.close();
   },
 }, indexPageSelectors.popupMesto);
@@ -85,27 +157,3 @@ profileAddButtonElement.addEventListener('click', () => {
   addMestoValidator.resetValidation();
   addMestoPopup.open();
 });
-
-
-let myID;
-
-const api = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-66',
-  headers: {
-    authorization: 'dc6a4a93-0c58-4e81-85df-4663aee25693',
-    'Content-Type': 'application/json',
-  },
-})
-
-Promise.all([api.getUserInfo(), api.getCards()])
-  .then(([userInfo, cards]) => {
-    console.log(userInfo)
-    myID = userInfo._id;
-    userProfile.setUserInfo({
-      name: userInfo.name,
-      job: userInfo.about,
-      avatar: userInfo.avatar
-    });
-    mestoSection.renderItems(cards);
-  })
-  .catch(console.log);

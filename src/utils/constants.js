@@ -40,6 +40,7 @@ export const indexPageSelectors = {
   popupUser: '.popup_type_edit-profile',
   popupMesto: '.popup_type_add-mesto',
   popupMestoImage: '.popup_type_show-mesto',
+  popupEditAvatar: '.popup_type_update-avatar',
   userName: '.profile__user-name',
   userJob: '.profile__user-job',
   userAvatar: '.profile__avatar'
@@ -47,7 +48,11 @@ export const indexPageSelectors = {
 
 const popupUserElement = document.querySelector('.popup_type_edit-profile')
 const popupMestoElement = document.querySelector('.popup_type_add-mesto');
+const popupAvatarElement = document.querySelector('.popup_type_update-avatar')
 export const popupUserFormElement = popupUserElement.querySelector('.form');
 export const profileEditButtonElement = document.querySelector('.profile__edit-button');
 export const popupMestoFormElement = popupMestoElement.querySelector('.form');
 export const profileAddButtonElement = document.querySelector('.profile__add-button');
+
+export const avatarFormElement = popupAvatarElement.querySelector('.form');
+export const avatarEditButtonElement = document.querySelector('.profile__avatar-edit-button');

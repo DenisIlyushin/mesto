@@ -15,8 +15,11 @@
     </header>
     <main class="content">
       <section class="profile" id="profile">
-        <img class="profile__avatar" src="<%=require('./images/avatar-self.png')%>"
-          alt="Аватар пользователя">
+        <div class="profile__avatar-container">
+          <img class="profile__avatar" src="<%=require('./images/avatar-self.png')%>"
+               alt="Аватар пользователя">
+          <button class="profile__avatar-edit-button" type="button"></button>
+        </div>
         <div class="profile__info">
           <h1 class="profile__user-name">Ден Илюшин</h1>
           <p class="profile__user-job">Студент Я.Практикума</p>
@@ -56,6 +59,22 @@
               name="job" type="text" placeholder="Чем занимаетесь?"
               required minlength="2" maxlength="200">
             <span class="form__input-error userJob-error"></span>
+          </label>
+          <button class="form__submit-button" type="submit">Сохранить</button>
+        </form>
+      </div>
+    </div>
+    <div class="popup popup_type_update-avatar" id="updateAvatar">
+      <div class="popup__container">
+        <button class="popup__close-button" type="button"></button>
+        <form class="form" name="popupEditProfileAvatar" autocomplete="off"
+              novalidate>
+          <h2 class="form__title">Обновить аватар</h2>
+          <label class="form__input-label">
+            <input class="form__input form__input_type_source" id="userAvatar"
+                   name="avatar" type="url" placeholder="Ссылка на изображение" required
+                   minlength="2">
+            <span class="form__input-error userAvatar-error"></span>
           </label>
           <button class="form__submit-button" type="submit">Сохранить</button>
         </form>
