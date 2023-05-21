@@ -119,7 +119,7 @@ avatarEditButtonElement.addEventListener('click', function () {
 
 // обработка начального наполнения карточек
 function addMesto(mestoObj) {
-  const cardID = mestoObj._id;
+  // const cardID = mestoObj._id;
   const mesto = new Card(
     {
       dataObj: mestoObj,
@@ -142,7 +142,7 @@ function addMesto(mestoObj) {
           }
         );
         deleteConfirmationPopup.setEventListeners();
-        deleteConfirmationPopup.open(cardID);
+        deleteConfirmationPopup.open(mestoObj._id);
       },
       likeCallback: (cardID) => {
         api.likeCard(cardID)
