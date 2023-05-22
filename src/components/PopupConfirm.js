@@ -16,7 +16,7 @@ export default class PopupConfirm extends Popup {
   open(card) {
     this.#card = card;
     super.open()
-  }
+  };
 
   setEventListeners() {
     super.setEventListeners();
@@ -24,5 +24,5 @@ export default class PopupConfirm extends Popup {
       event.preventDefault();
       this.#handleSubmit(this.#card)
     })
-  }
+  };
 }

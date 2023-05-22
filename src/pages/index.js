@@ -41,13 +41,13 @@ Promise.all([api.getUserInfo(), api.getCards()])
   })
   .catch(console.log);
 
-
 // обработка форм редактирования профиля
 const userProfile = new UserInfo({
   userNameSelector: indexPageSelectors.userName,
   userJobSelector: indexPageSelectors.userJob,
   userAvatarSelector: indexPageSelectors.userAvatar
 });
+
 const userFormValidator = new FormValidator(
   popupUserFormElement,
   validationConfig
@@ -60,6 +60,7 @@ const editProfilePopup = new PopupWithForm({
     api.setUserInfo({
       name: data.name,
       about: data.job,
+      avatar: data.avatar
     })
       .then((response) => {
         userProfile.setUserInfo({
@@ -83,6 +84,7 @@ profileEditButtonElement.addEventListener('click', function () {
   editProfilePopup.open()
 });
 
+// обработка редактирования аватара
 const userAvatarFormValidator = new FormValidator(
   avatarFormElement,
   validationConfig
@@ -93,7 +95,9 @@ const editAvatarPopup = new PopupWithForm({
   formSubmitCallback: (data) => {
     editAvatarPopup.loading(true, 'Обновление...')
     api.setUserAvatar({
-      avatar: data.avatar,
+      name: data.name,
+      about: data.job,
+      avatar: data.avatar
     })
       .then((response) => {
         userProfile.setUserInfo({

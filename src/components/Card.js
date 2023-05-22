@@ -35,7 +35,6 @@ export default class Card {
   };
 
   #getTemplateElement(templateSelector) {
-    // возвращает готовый элемент по шаблону
     return document
       .querySelector(templateSelector)
       .content
@@ -62,12 +61,10 @@ export default class Card {
   };
 
   #setEventsListeners() {
-    // добавляет слушателей события к карточке
     this.#innerElements.likeButton
       .addEventListener('click', () => {this.#handleLike()});
     this.#innerElements.image
       .addEventListener('click', () => {this.#openInPopup()});
-    // если не пользователь создал карточку, то убираем кнопку, или вешаем слушателя
     if (this.#userID !== this.#data.ownerID) {
       this.#innerElements.deleteButton.remove();
       this.#innerElements.deleteButton = null;
@@ -84,7 +81,6 @@ export default class Card {
   }
 
   delete() {
-    // удаляет карточку места
     this.#element.remove();
     this.#innerElements = null;
   };
@@ -99,11 +95,9 @@ export default class Card {
   };
 
   make() {
-    // возвращает готовый элемент карточки места
     this.#innerElements.image.src = this.#data.link;
     this.#innerElements.image.alt = `Фотография ${this.#data.name}`;
     this.#innerElements.title.textContent = this.#data.name;
-    // ставим изначальное количество лайков
     this.setLikes(this.#data);
     this.#setEventsListeners();
 
