@@ -125,7 +125,6 @@ avatarEditButtonElement.addEventListener('click', function () {
 const deleteConfirmationPopup = new PopupConfirm(
   '.popup_type_delete-mesto',
   (mesto) => {
-    console.log(mesto)
     api.deleteCard(mesto.getID())
       .then(() => {
         mesto.delete();
