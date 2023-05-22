@@ -73,9 +73,15 @@ export default class Card {
       this.#innerElements.deleteButton = null;
     } else {
       this.#innerElements.deleteButton
-        .addEventListener('click', () => {this.#handleCardDelete()});
+        .addEventListener('click', () => {
+          this.#handleCardDelete();
+        });
     }
   };
+
+  getID() {
+    return this.#data.cardID
+  }
 
   delete() {
     // удаляет карточку места
@@ -101,11 +107,11 @@ export default class Card {
     this.setLikes(this.#data);
     this.#setEventsListeners();
 
-    // обработка карточек с "битыми" картинками.
+    // обработка карточек с "битыми" картинками, добавил сам
     this.#innerElements.image.addEventListener('error', (event) => {
       console.log(`Ошибка загрузки ${event.target.src}. Карточка будет удалена.`)
       this.delete()
-    })
+    });
     return this.#element
   };
 }

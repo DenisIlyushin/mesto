@@ -117,6 +117,22 @@ avatarEditButtonElement.addEventListener('click', function () {
   editAvatarPopup.open()
 });
 
+// обработка удаления карточек
+const deleteConfirmationPopup = new PopupConfirm(
+  '.popup_type_delete-mesto',
+  (mesto) => {
+    console.log(mesto)
+    api.deleteCard(mesto.getID())
+      .then(() => {
+        mesto.delete();
+      })
+      .catch(console.log)
+      .finally(() => {
+        deleteConfirmationPopup.close();
+      })
+  }
+);
+
 // обработка начального наполнения карточек
 function addMesto(mestoObj) {
   const mesto = new Card(
@@ -127,21 +143,8 @@ function addMesto(mestoObj) {
         mestoViewPopup.open({data: mestoObj})
       },
       deleteCardCallback: () => {
-        const deleteConfirmationPopup = new PopupConfirm(
-          '.popup_type_delete-mesto',
-          (cardID) => {
-            api.deleteCard(cardID)
-              .then(() => {
-                mesto.delete();
-              })
-              .catch(console.log)
-              .finally(() => {
-                deleteConfirmationPopup.close();
-              })
-          }
-        );
         deleteConfirmationPopup.setEventListeners();
-        deleteConfirmationPopup.open(mestoObj._id);
+        deleteConfirmationPopup.open(mesto);
       },
       likeCallback: (cardID) => {
         api.likeCard(cardID)
