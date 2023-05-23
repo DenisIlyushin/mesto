@@ -14,10 +14,6 @@ export default class Api {
     return Promise.reject(`Ошибка: ${response.status}`);
   };
 
-  #handleError(error) {
-    return error
-  };
-
   getCards() {
     return fetch(`${
         this.#baseUrl}/cards`,
@@ -32,7 +28,6 @@ export default class Api {
       {headers: this.#headers}
     )
       .then(this.#handleResponse)
-      .catch(this.#handleError);
   };
 
   setUserInfo({ name, about }) {
