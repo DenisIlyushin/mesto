@@ -51,6 +51,7 @@ export default class PopupWithForm extends Popup {
     if (isLoading) {
       this.#submitButton.classList.add('.form__submit-button_in-progress')
       this.#submitButton.textContent = message
+      return
     }
     this.#submitButton.classList.remove('.form__submit-button_in-progress')
     this.#submitButton.textContent = this.#submitButtonMessage

@@ -9,7 +9,7 @@ export default class Card {
   #dislikeCallback
 
   constructor(
-    {dataObj, userID, zoomCardCallback, deleteCardCallback, likeCallback, dislikeCallback },
+    {dataObj, userID, zoomCardCallback, deleteCardCallback, likeCallback, dislikeCallback},
     templateSelector
   ) {
     this.#data = {
@@ -53,18 +53,21 @@ export default class Card {
   #handleLike() {
     if (this.#innerElements.likeButton.classList.contains('mesto__like-button_liked')) {
       this.#dislikeCallback(this.#data.cardID);
-      this.#innerElements.likeButton.classList.remove('mesto__like-button_liked');
     } else {
       this.#likeCallback(this.#data.cardID);
-      this.#innerElements.likeButton.classList.add('mesto__like-button_liked');
     }
   };
 
   #setEventsListeners() {
     this.#innerElements.likeButton
-      .addEventListener('click', () => {this.#handleLike()});
+      .addEventListener('click', () => {
+          this.#handleLike()
+        }
+      );
     this.#innerElements.image
-      .addEventListener('click', () => {this.#openInPopup()});
+      .addEventListener('click', () => {
+        this.#openInPopup()
+      });
     if (this.#userID !== this.#data.ownerID) {
       this.#innerElements.deleteButton.remove();
       this.#innerElements.deleteButton = null;
@@ -76,6 +79,16 @@ export default class Card {
     }
   };
 
+  #addLike() {
+    this.#innerElements.likeButton
+      .classList.add('mesto__like-button_liked');
+  }
+
+  #removeLike() {
+    this.#innerElements.likeButton
+      .classList.remove('mesto__like-button_liked');
+  }
+
   getID() {
     return this.#data.cardID
   }
@@ -85,13 +98,19 @@ export default class Card {
     this.#innerElements = null;
   };
 
-  setLikes({ likes }) {
+  setLikes({likes}) {
     this.#innerElements.likeCount.textContent = likes.length
-    likes.forEach((like) => {
-      if (like._id === this.#userID) {
-        this.#innerElements.likeButton.classList.add('mesto__like-button_liked');
-      }
-    })
+    if (!likes.length) {
+      this.#removeLike()
+    } else {
+      likes.forEach((user) => {
+        if (user._id === this.#userID) {
+          this.#addLike()
+          return
+        }
+        this.#removeLike()
+      })
+    }
   };
 
   make() {

@@ -35,6 +35,7 @@ export default class FormValidator {
     if (this.#hasInvalidInput()) {
       this.#disableSubmitButton();
     } else {
+      console.log('on')
       this.#enableSubmitButton();
     }
   };

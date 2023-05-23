@@ -79,8 +79,8 @@ const editProfilePopup = new PopupWithForm({
 editProfilePopup.setEventListeners();
 
 profileEditButtonElement.addEventListener('click', function () {
-  editProfilePopup.setInputValues({data: userProfile.getUserInfo()});
   userFormValidator.resetValidation();
+  editProfilePopup.setInputValues({data: userProfile.getUserInfo()});
   editProfilePopup.open()
 });
 
@@ -128,13 +128,12 @@ const deleteConfirmationPopup = new PopupConfirm(
     api.deleteCard(mesto.getID())
       .then(() => {
         mesto.delete();
-      })
-      .catch(console.log)
-      .finally(() => {
         deleteConfirmationPopup.close();
       })
+      .catch(console.log)
   }
 );
+deleteConfirmationPopup.setEventListeners();
 
 // обработка начального наполнения карточек
 function addMesto(mestoObj) {
@@ -146,7 +145,6 @@ function addMesto(mestoObj) {
         mestoViewPopup.open({data: mestoObj})
       },
       deleteCardCallback: () => {
-        deleteConfirmationPopup.setEventListeners();
         deleteConfirmationPopup.open(mesto);
       },
       likeCallback: (cardID) => {
